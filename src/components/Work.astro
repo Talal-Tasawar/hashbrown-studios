@@ -1,0 +1,113 @@
+---
+import { Picture } from "astro:assets";
+import Icon from "./Icon.astro";
+import tapvate from "../assets/work/tapvate.png";
+import classic from "../assets/work/classic.webp";
+import revamp from "../assets/work/revamp.webp";
+import autopub from "../assets/work/autopub.webp";
+import rehan from "../assets/work/rehan.webp";
+
+const projects = [
+  {
+    name: "Tapify / Tapvate",
+    url: "https://tapvate.com",
+    shot: tapvate,
+    summary: "Landing page for an NFC card that sends customers straight to a business's Google review form with one tap.",
+    industry: "NFC review cards",
+    location: null,
+    scope: "Landing page",
+  },
+  {
+    name: "Classic Detailers",
+    url: "https://classic-detailers.vercel.app",
+    shot: classic,
+    summary: "Landing page for a paint protection film studio, with slot booking, live opening hours and a map to the workshop.",
+    industry: "Car detailing",
+    location: "PWD, Islamabad",
+    scope: "Landing page, booking, map",
+  },
+  {
+    name: "Revamp Detailing",
+    url: "https://revamp-detailing.vercel.app",
+    shot: revamp,
+    summary: "Online store for car care products from the team behind Classic Detailers, with a cart and product guides.",
+    industry: "Car care retail",
+    location: "Islamabad",
+    scope: "Online store",
+  },
+  {
+    name: "AutoPub Detailing",
+    url: "https://autopubdetailing.com",
+    shot: autopub,
+    summary: "Landing page for two 24-hour PPF and ceramic studios, with appointment booking and maps to both locations.",
+    industry: "Car detailing",
+    location: "Karachi",
+    scope: "Landing page, booking, map",
+  },
+  {
+    name: "Rehan Car Wraps",
+    url: "https://rehan-carwrap.vercel.app",
+    shot: rehan,
+    summary: "Landing page for a wrap and PPF installer that shows every film brand they fit, with slot booking and a map.",
+    industry: "Wraps and PPF",
+    location: "Rawalpindi",
+    scope: "Landing page, booking, map",
+  },
+];
+const host = (u: string) => new URL(u).host;
+---
+<section id="work" class="cv py-24 md:py-36">
+  <div class="wrap">
+    <div class="rv mb-12 max-w-3xl md:mb-20">
+      <h2 class="h2">Selected work</h2>
+      <p class="lede mt-6">Recent launches for detailing studios, a wrap shop, a car care store and an NFC review card.</p>
+    </div>
+
+    <ol class="grid gap-6 md:gap-[12vh]">
+      {projects.map((p, n) => (
+        <li class="stack-item" style={`--n:${n}`}>
+          <article class="bezel bg-bg">
+            <div class="bezel-core grid gap-8 p-5 md:min-h-[min(78dvh,700px)] md:grid-cols-12 md:items-center md:gap-10 md:p-10 lg:p-12">
+              <div class="flex h-full flex-col md:col-span-5 lg:col-span-4">
+                <h3 class="text-[clamp(2rem,3.4vw,3.2rem)] font-bold leading-none tracking-[-0.03em] [font-stretch:120%]">{p.name}</h3>
+                <p class="mt-5 max-w-[38ch] text-muted">{p.summary}</p>
+                <dl class="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-line pt-6 text-[0.95rem] md:mt-auto">
+                  <div><dt class="text-muted">Industry</dt><dd class="mt-1 font-medium">{p.industry}</dd></div>
+                  <div><dt class="text-muted">{p.location ? "Location" : "Year"}</dt><dd class="mt-1 font-medium">{p.location ?? "2026"}</dd></div>
+                  <div><dt class="text-muted">Scope</dt><dd class="mt-1 font-medium">{p.scope}</dd></div>
+                  {p.location && <div><dt class="text-muted">Year</dt><dd class="mt-1 font-medium">2026</dd></div>}
+                </dl>
+                <a href={p.url} target="_blank" rel="noopener" class="btn btn-ghost btn-sm magnetic mt-7 w-fit">
+                  <span>Visit site</span><span class="btn-ico"><Icon name="arrow-up-right" /></span>
+                  <span class="sr-only">: {p.name} (opens in a new tab)</span>
+                </a>
+              </div>
+
+              <div class="preview-wrap md:col-span-7 lg:col-span-8">
+                <div class="preview-3d">
+                  <div class="preview-tilt" data-ptilt>
+                    <a href={p.url} target="_blank" rel="noopener" tabindex="-1" aria-hidden="true" class="frame block">
+                      <div class="frame-bar"><span>{host(p.url)}</span></div>
+                      <Picture
+                        src={p.shot}
+                        alt=""
+                        formats={["avif", "webp"]}
+                        quality={72}
+                        width={1600}
+                        widths={[480, 800, 1200, 1600]}
+                        sizes="(min-width: 1024px) 58vw, 88vw"
+                        loading="lazy"
+                        decoding="async"
+                        class="aspect-[1904/993] w-full object-cover object-top"
+                      />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </article>
+        </li>
+      ))}
+    </ol>
+  </div>
+</section>

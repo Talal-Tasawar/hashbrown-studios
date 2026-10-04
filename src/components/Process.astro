@@ -1,0 +1,31 @@
+---
+const steps = [
+  { name: "Discover", body: "A call, a short questionnaire and a look at your competitors. We agree on goals, scope and a launch date.", gets: "Project brief, sitemap, timeline" },
+  { name: "Design", body: "Wireframes first, then full designs in Figma. You review real pages with real copy, not mood boards.", gets: "Key pages in Figma, two revision rounds" },
+  { name: "Build", body: "We code it with Astro, Next.js or Shopify, then share a private link so you can click through every page.", gets: "Responsive site, CMS, staging link" },
+  { name: "Launch", body: "We test on real phones, connect your domain, set up analytics and search, then walk you through it.", gets: "Live site, SEO setup, handover video" },
+];
+---
+<section id="process" class="cv pan py-24 md:py-36">
+  <div class="pan-sticky">
+    <div class="pan-track wrap md:grid-cols-2 lg:max-w-none">
+      <div class="pan-intro flex flex-col justify-center pb-6 md:col-span-2 lg:pb-0 lg:pr-[4vw]">
+        <h2 class="h2">How a project runs</h2>
+        <p class="lede mt-6">Four stages, one point of contact, and a live site within a week.</p>
+      </div>
+      {steps.map((s, i) => (
+        <article class="pan-card bezel">
+          <div class="bezel-core flex h-full flex-col p-7 md:p-9">
+            <span class="text-[clamp(4.5rem,8vw,8.5rem)] font-extralight leading-[0.85] tracking-[-0.04em] text-accent-ink [font-stretch:125%]">{String(i + 1).padStart(2, "0")}</span>
+            <h3 class="mt-8 text-[clamp(1.75rem,2.6vw,2.5rem)] font-bold leading-none tracking-[-0.03em] [font-stretch:120%] lg:mt-auto">{s.name}</h3>
+            <p class="mt-4 text-muted">{s.body}</p>
+            <p class="mt-6 border-t border-line pt-5 text-[0.95rem]"><span class="text-muted">You get: </span>{s.gets}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+    <div class="mt-10 hidden px-[4vw] lg:block" aria-hidden="true">
+      <div class="h-px bg-line"><div class="pan-progress h-px origin-left bg-accent"></div></div>
+    </div>
+  </div>
+</section>
