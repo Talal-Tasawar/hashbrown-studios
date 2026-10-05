@@ -1,24 +1,43 @@
 ---
 import "../styles/global.css";
-import { CONTACT } from "../lib/brand";
+import { CONTACT, FOUNDER, GEO } from "../lib/brand";
 
-const title = "Hashbrown Studios | Web Design & Development Agency in Islamabad";
-const description =
-  "Hashbrown Studios designs and builds fast, memorable websites for founders and growing brands. Web design, development, e-commerce and branding from Islamabad.";
-const url = new URL("/", Astro.site).href;
+interface Props {
+  title?: string;
+  description?: string;
+  /** Canonical path for the page; pass null for pages that should not declare one (404). */
+  path?: string | null;
+}
+const {
+  title = "Hashbrown Studios | Web Design & Development Agency in Islamabad",
+  description = "Hashbrown Studios designs and builds fast, memorable websites for businesses in Islamabad, Rawalpindi, Karachi and beyond. Landing pages, online stores and booking sites.",
+  path = "/",
+} = Astro.props;
+const home = new URL("/", Astro.site).href;
+const url = path === null ? null : new URL(path, Astro.site).href;
 const ogImage = new URL("/og.jpg", Astro.site).href;
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  name: "Hashbrown Studios",
-  url,
-  image: ogImage,
-  description,
-  email: CONTACT.email,
-  telephone: "+92-364-4915188",
-  address: { "@type": "PostalAddress", streetAddress: "G-11 Markaz", addressLocality: "Islamabad", addressCountry: "PK" },
-  sameAs: [CONTACT.instagram],
-  areaServed: "Worldwide",
+  "@graph": [
+    { "@type": "WebSite", "@id": `${home}#website`, url: home, name: "Hashbrown Studios", publisher: { "@id": `${home}#studio` } },
+    {
+      "@type": "ProfessionalService",
+      "@id": `${home}#studio`,
+      name: "Hashbrown Studios",
+      url: home,
+      logo: new URL("/apple-touch-icon.png", Astro.site).href,
+      image: ogImage,
+      description,
+      email: CONTACT.email,
+      telephone: "+92-364-4915188",
+      address: { "@type": "PostalAddress", streetAddress: "G-11 Markaz", addressLocality: "Islamabad", addressCountry: "PK" },
+      geo: { "@type": "GeoCoordinates", latitude: GEO.lat, longitude: GEO.lng },
+      areaServed: ["Islamabad", "Rawalpindi", "Karachi", "Pakistan"],
+      sameAs: [CONTACT.instagram],
+      founder: { "@id": `${home}#founder` },
+    },
+    { "@type": "Person", "@id": `${home}#founder`, name: FOUNDER.name, jobTitle: FOUNDER.role, worksFor: { "@id": `${home}#studio` } },
+  ],
 };
 ---
 <!doctype html>
@@ -30,9 +49,9 @@ const jsonLd = {
     <meta name="description" content={description} />
     <meta name="theme-color" content="#130e09" media="(prefers-color-scheme: dark)" />
     <meta name="theme-color" content="#fbf2e4" media="(prefers-color-scheme: light)" />
-    <link rel="canonical" href={url} />
+    {url && <link rel="canonical" href={url} />}
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={url} />
+    {url && <meta property="og:url" content={url} />}
     <meta property="og:site_name" content="Hashbrown Studios" />
     <meta property="og:image" content={ogImage} />
     <meta property="og:image:width" content="1200" />
@@ -42,11 +61,13 @@ const jsonLd = {
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap.xml" />
     <link rel="preload" href="/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin />
     <script is:inline>
       try { const t = localStorage.getItem("theme"); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
     </script>
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <slot name="head" />
   </head>
   <body>
     <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[70] focus:rounded-full focus:bg-accent focus:px-5 focus:py-3 focus:text-on-accent">Skip to content</a>

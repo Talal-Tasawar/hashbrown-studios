@@ -90,7 +90,8 @@ const host = (u: string) => new URL(u).host;
                       <div class="frame-bar"><span>{host(p.url)}</span></div>
                       <Picture
                         src={p.shot}
-                        alt=""
+                        alt={`${p.name} website homepage, designed and built by Hashbrown Studios`}
+                        fallbackFormat="webp"
                         formats={["avif", "webp"]}
                         quality={72}
                         width={1600}

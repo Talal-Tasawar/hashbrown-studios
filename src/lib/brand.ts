@@ -20,3 +20,11 @@ export const CONTACT = {
   mapsEmbed: "https://maps.google.com/maps?ll=33.66877,72.99891&z=16&hl=en&output=embed",
   mapsEmbedExplore: "https://maps.google.com/maps?q=33.66877,72.99891&z=16&hl=en&output=embed",
 };
+
+export const GEO = { lat: 33.66877, lng: 72.99891 };
+
+export const FOUNDER = {
+  name: "Talal Tasawar",
+  role: "Founder, designer and developer",
+  bio: "Talal founded Hashbrown Studios and leads design and development on every project, from the first call to launch day. Recent launches include Tapvate, Classic Detailers, Revamp Detailing, AutoPub Detailing and Rehan Car Wraps.",
+};

@@ -3,3 +3,8 @@ dist
 .astro
 .wrangler
 .playwright-cli
+
+# HyperFrames ad project
+videos/*/renders/
+videos/*/node_modules/
+videos/*/.hyperframes/

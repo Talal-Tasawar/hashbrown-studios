@@ -1,6 +1,8 @@
 ---
 import { Picture } from "astro:assets";
 import desk from "../assets/work/desk.jpg";
+import Icon from "./Icon.astro";
+import { CONTACT, FOUNDER } from "../lib/brand";
 import { siFigma, siAstro, siNextdotjs, siReact, siTailwindcss, siShopify, siWordpress, siWebflow, siCloudflare } from "simple-icons";
 const tools = [siFigma, siAstro, siNextdotjs, siReact, siTailwindcss, siShopify, siWordpress, siWebflow, siCloudflare];
 const scores = ["Performance", "Accessibility", "Best practices", "SEO"];
@@ -12,7 +14,7 @@ const h3 = "text-[1.5rem] font-bold leading-tight tracking-[-0.02em] [font-stret
     <div class="mt-12 grid gap-4 md:mt-20 md:grid-cols-12 md:gap-5">
       <article class="rv bezel md:col-span-7 md:row-span-2">
         <div class="bezel-core flex h-full flex-col overflow-hidden">
-          <Picture src={desk} alt="A designer's desk with a laptop, notebook and phone" formats={["avif", "webp"]} quality={60} width={1100} widths={[420, 700, 1100]} sizes="(min-width: 768px) 56vw, 92vw" class="aspect-[16/10] w-full object-cover md:aspect-auto md:min-h-[16rem] md:flex-1" loading="lazy" decoding="async" />
+          <Picture src={desk} alt="A designer's desk with a laptop, notebook and phone" formats={["avif", "webp"]} fallbackFormat="webp" quality={60} width={1100} widths={[420, 700, 1100]} sizes="(min-width: 768px) 56vw, 92vw" class="aspect-[16/10] w-full object-cover md:aspect-auto md:min-h-[16rem] md:flex-1" loading="lazy" decoding="async" />
           <div class="p-7 md:p-10">
             <h3 class="text-[clamp(1.6rem,2.4vw,2.25rem)] font-bold leading-tight tracking-[-0.025em] [font-stretch:115%]">You work with the people doing the work</h3>
             <p class="mt-3 max-w-[50ch] text-muted">No account managers and no handoffs to juniors. The designers and developers on your first call are the ones who build your site.</p>
@@ -62,5 +64,22 @@ const h3 = "text-[1.5rem] font-bold leading-tight tracking-[-0.02em] [font-stret
         </div>
       </article>
     </div>
+
+    <article id="founder" class="rv bezel mt-4 md:mt-5">
+      <div class="bezel-core grid gap-6 p-7 md:grid-cols-12 md:items-center md:gap-10 md:p-10">
+        <div class="md:col-span-5">
+          <h3 class="text-[clamp(2rem,3.2vw,3rem)] font-bold leading-none tracking-[-0.03em] [font-stretch:120%]">{FOUNDER.name}</h3>
+          <p class="mt-3 text-muted">{FOUNDER.role}, Hashbrown Studios</p>
+        </div>
+        <div class="md:col-span-7">
+          <p class="max-w-[60ch] text-[1.1rem] leading-relaxed">{FOUNDER.bio}</p>
+          <div class="mt-6 flex flex-wrap gap-2">
+            <a href={`https://wa.me/${CONTACT.whatsapp}`} target="_blank" rel="noopener" aria-label={`Message ${FOUNDER.name} on WhatsApp`} class="map-action"><Icon name="whatsapp" class="size-5" /></a>
+            <a href={`mailto:${CONTACT.email}`} aria-label={`Email ${FOUNDER.name}`} class="map-action"><Icon name="envelope" class="size-5" /></a>
+            <a href={CONTACT.instagram} target="_blank" rel="noopener" aria-label="Hashbrown Studios on Instagram" class="map-action"><Icon name="instagram" class="size-5" /></a>
+          </div>
+        </div>
+      </div>
+    </article>
   </div>
 </section>
