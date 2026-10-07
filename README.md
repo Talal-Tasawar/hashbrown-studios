@@ -21,5 +21,10 @@ Every push to `main` builds the site and publishes it to GitHub Pages (`.github/
 
 ## Notes
 
-- Windows Application Control blocks Astro's native compiler binary on this PC, so the WASM fallback (`@astrojs/compiler-binding-wasm32-wasi`) is an optional dependency. If a fresh `npm install` here fails to build, run `npm install --force`. GitHub Actions uses the native binary.
+- Windows Application Control blocks Astro's native compiler binary on this PC, so the WASM fallback (`@astrojs/compiler-binding-wasm32-wasi`) is an optional dependency. npm skips it on this PC (it is marked for another processor), so if a local build fails with "An Application Control policy has blocked this file", install it in a scratch folder and copy it in (PowerShell):
+  ```powershell
+  mkdir $env:TEMP\wasi; cd $env:TEMP\wasi; npm init -y; npm install @astrojs/compiler-binding-wasm32-wasi@0.5.1 --force
+  Copy-Item -Recurse -Force node_modules\* C:\Users\talal\code\hashbrown-studios\node_modules\
+  ```
+  GitHub Actions uses the native binary and is unaffected.
 - The font is a subset of Archivo (variable weight + width). If you add text outside basic Latin, regenerate it from `@fontsource-variable/archivo` with `fontTools.subset` and widen `unicode-range` in `src/styles/global.css`.
