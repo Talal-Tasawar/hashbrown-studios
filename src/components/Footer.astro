@@ -10,7 +10,7 @@ const links = [
   { href: "#book", label: "Book a call" },
 ];
 ---
-<footer class="cv overflow-hidden border-t border-line pt-16 md:pt-24">
+<footer class="band-ink cv overflow-hidden pt-16 md:pt-24">
   <div class="wrap grid gap-12 md:grid-cols-12">
     <div class="md:col-span-5">
       <Logo id="ft-logo" class="size-14" />
@@ -24,7 +24,6 @@ const links = [
     <div class="grid content-start gap-2 md:col-span-3">
       <a href={`mailto:${CONTACT.email}`} class="text-[1.05rem] transition-colors hover:text-accent-ink">{CONTACT.email}</a>
       <a href={CONTACT.phoneHref} class="text-[1.05rem] transition-colors hover:text-accent-ink">{CONTACT.phoneDisplay}</a>
-      <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" class="text-[1.05rem] transition-colors hover:text-accent-ink">Instagram</a>
       <p class="text-muted">{CONTACT.address}</p>
     </div>
   </div>

@@ -17,7 +17,7 @@ const faqs = [
   },
   {
     q: "What kind of websites do you build?",
-    a: "Landing pages, online stores, and business sites with booking forms and maps. Recent projects include car detailing studios, a car wrap shop, a car care store and an NFC review card brand.",
+    a: "Landing pages, online stores, and business sites with booking forms and maps. Recent projects include car detailing studios, a car wrap shop and a car care store.",
   },
   {
     q: "Will my website show up on Google?",
@@ -34,7 +34,7 @@ const schema = {
   mainEntity: faqs.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
 };
 ---
-<section id="faq" class="cv py-24 md:py-36">
+<section id="faq" class="band-soft cv py-24 md:py-36">
   <div class="wrap grid gap-12 lg:grid-cols-12 lg:gap-16">
     <div class="lg:col-span-5">
       <h2 class="h2 rv text-[clamp(2.4rem,3.6vw,3.6rem)] lg:sticky lg:top-28">Questions, answered</h2>

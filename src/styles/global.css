@@ -23,21 +23,29 @@
    Z-index scale: content 0, grain 40, nav 50, menu 60. */
 :root {
   color-scheme: dark;
-  --bg: #130e09;
-  --surface: #1d1610;
-  --surface-2: #271e16;
-  --ink: #f4e8d4;
-  --muted: #b8a690;
-  --line: rgb(244 232 212 / 0.12);
-  --accent: #efaa4c;
-  --on-accent: #1b120a;
-  --accent-ink: #f0b260;
-  --danger: #f0896b;
-  --shadow: 12 7 2;
-  --grain: 0.07;
+  --bg: #100e0c;
+  --surface: #1c1915;
+  --surface-2: #27231e;
+  --ink: #fff8ee;
+  --muted: #b8afa4;
+  --line: rgb(255 248 238 / 0.12);
+  --accent: #ffb423;
+  --on-accent: #17120e;
+  --accent-ink: #ffa552;
+  --danger: #ff8a70;
+  --shadow: 0 0 0;
+  --grain: 0.05;
   --map-filter: invert(0.92) hue-rotate(180deg) grayscale(0.85) brightness(0.92) contrast(1.08);
-  --map-tint: rgb(239 170 76 / 0.22);
+  --map-tint: rgb(255 180 35 / 0.2);
   --map-blend: color;
+  /* Colour bands and per-project card tints */
+  --band-ink: #1e1914;
+  --band-ink-2: #2a231c;
+  --band-soft: #17140f;
+  --t-lilac: #201c2c;
+  --t-sky: #161e2a;
+  --t-mint: #16211a;
+  --t-peach: #281b15;
   --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --ease-soft: cubic-bezier(0.32, 0.72, 0, 1);
   interpolate-size: allow-keywords;
@@ -49,41 +57,88 @@
 @media (prefers-color-scheme: light) {
   :root:not([data-theme="dark"]) {
     color-scheme: light;
-    --bg: #fbf2e4;
-    --surface: #f3e5cf;
-    --surface-2: #ead8bb;
-    --ink: #20150c;
-    --muted: #5e4b3a;
-    --line: rgb(32 21 12 / 0.14);
-    --accent: #e39b3d;
-    --on-accent: #20150c;
-    --accent-ink: #9a5512;
-    --danger: #b23a1c;
-    --shadow: 110 62 20;
-    --grain: 0.05;
-    --map-filter: grayscale(1) contrast(0.92) brightness(1.05);
-  --map-tint: rgb(227 155 61 / 0.2);
-  --map-blend: multiply;
+    --bg: #fffcf7;
+    --surface: #fff4de;
+    --surface-2: #ffe9bf;
+    --ink: #17120e;
+    --muted: #5c5249;
+    --line: rgb(23 18 14 / 0.12);
+    --accent: #ffb423;
+    --on-accent: #17120e;
+    --accent-ink: #c2410c;
+    --danger: #b42318;
+    --shadow: 120 72 12;
+    --grain: 0.03;
+    --map-filter: grayscale(1) contrast(0.95) brightness(1.06);
+    --map-tint: rgb(255 180 35 / 0.22);
+    --map-blend: multiply;
+    --band-ink: #17120e;
+    --band-ink-2: #241d17;
+    --band-soft: #fff5d9;
+    --t-lilac: #f1ebff;
+    --t-sky: #e7f1ff;
+    --t-mint: #e6f6ea;
+    --t-peach: #ffebe2;
   }
 }
 :root[data-theme="light"] {
   color-scheme: light;
-  --bg: #fbf2e4;
-  --surface: #f3e5cf;
-  --surface-2: #ead8bb;
-  --ink: #20150c;
-  --muted: #5e4b3a;
-  --line: rgb(32 21 12 / 0.14);
-  --accent: #e39b3d;
-  --on-accent: #20150c;
-  --accent-ink: #9a5512;
-  --danger: #b23a1c;
-  --shadow: 110 62 20;
-  --grain: 0.05;
-  --map-filter: grayscale(1) contrast(0.92) brightness(1.05);
-  --map-tint: rgb(227 155 61 / 0.2);
+  --bg: #fffcf7;
+  --surface: #fff4de;
+  --surface-2: #ffe9bf;
+  --ink: #17120e;
+  --muted: #5c5249;
+  --line: rgb(23 18 14 / 0.12);
+  --accent: #ffb423;
+  --on-accent: #17120e;
+  --accent-ink: #c2410c;
+  --danger: #b42318;
+  --shadow: 120 72 12;
+  --grain: 0.03;
+  --map-filter: grayscale(1) contrast(0.95) brightness(1.06);
+  --map-tint: rgb(255 180 35 / 0.22);
   --map-blend: multiply;
+  --band-ink: #17120e;
+  --band-ink-2: #241d17;
+  --band-soft: #fff5d9;
+  --t-lilac: #f1ebff;
+  --t-sky: #e7f1ff;
+  --t-mint: #e6f6ea;
+  --t-peach: #ffebe2;
 }
+
+/* ---------- Colour bands: a section redefines the tokens and everything inside follows ---------- */
+.band-ink {
+  color-scheme: dark;
+  --bg: var(--band-ink);
+  --surface: var(--band-ink-2);
+  --surface-2: #332b23;
+  --ink: #fff8ee;
+  --muted: #bdb2a5;
+  --line: rgb(255 248 238 / 0.13);
+  --accent: #ffb423;
+  --on-accent: #17120e;
+  --accent-ink: #ffb423;
+  --shadow: 0 0 0;
+  background: var(--bg);
+  color: var(--ink);
+}
+.band-sun {
+  color-scheme: light;
+  --bg: #ffb423;
+  --surface: #fffaf0;
+  --surface-2: #fff1d1;
+  --ink: #17120e;
+  --muted: #4a3a22;
+  --line: rgb(23 18 14 / 0.16);
+  --accent: #17120e;
+  --on-accent: #ffb423;
+  --accent-ink: #b5360b;
+  --shadow: 110 60 0;
+  background: var(--bg);
+  color: var(--ink);
+}
+.band-soft { --bg: var(--band-soft); background: var(--bg); }
 
 @theme inline {
   --font-sans: "Archivo", "Archivo Fallback", ui-sans-serif, system-ui, sans-serif;
@@ -251,6 +306,27 @@ body::after {
     .hb-scroll { animation: hb-exit linear both; animation-timeline: var(--tl-hero); animation-range: exit 0% exit 100%; }
   }
 }
+/* Sunny glow behind the hashbrown and a highlighter swipe on the headline */
+.hb-glow {
+  position: absolute;
+  inset: -16%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, color-mix(in oklab, var(--accent) 58%, transparent), transparent 72%);
+  filter: blur(8px);
+}
+.hl {
+  color: var(--on-accent);
+  background: linear-gradient(var(--accent), var(--accent)) 0 62% / 100% 0.84em no-repeat;
+  border-radius: 0.06em;
+  padding-inline: 0.07em;
+  margin-inline: -0.07em;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .hl { animation: hl-in 1s var(--ease) 0.6s both; }
+  .hb-glow { animation: glow 6s cubic-bezier(0.45, 0, 0.55, 1) infinite alternate; }
+}
+@keyframes hl-in { from { background-size: 0% 0.84em; color: var(--ink); } }
+@keyframes glow { to { transform: scale(1.08); opacity: 0.75; } }
 @keyframes hb-in { from { transform: translateY(-14%) rotateY(-200deg) rotateX(40deg) scale(0.25); } }
 @keyframes hb-float { to { transform: translateY(-4%) rotateZ(3deg) rotateY(8deg); } }
 @keyframes hb-shadow { to { transform: scale(0.82); opacity: 0.7; } }

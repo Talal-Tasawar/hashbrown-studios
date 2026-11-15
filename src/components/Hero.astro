@@ -11,7 +11,7 @@ const dotEdges = Array.from({ length: 8 }, (_, j) => j + 1);
       <h1 class="display text-[clamp(3.05rem,7.4vw,8.25rem)]">
         <span class="mb-5 block text-[clamp(0.95rem,1.15vw,1.1rem)] font-semibold leading-snug tracking-normal text-accent-ink [font-stretch:110%] md:mb-7">Hashbrown Studios, web design in Islamabad</span>
         <span class="hero-line block whitespace-nowrap">Websites,</span>
-        <span class="hero-line block whitespace-nowrap">made crisp.</span>
+        <span class="hero-line block whitespace-nowrap">made <span class="hl">crisp.</span></span>
       </h1>
       <p class="hero-rise lede mt-6 md:mt-9">We design and build fast, memorable websites for founders and growing brands, from first sketch to launch day.</p>
       <div class="hero-rise mt-8 flex flex-wrap gap-3">
@@ -21,6 +21,7 @@ const dotEdges = Array.from({ length: 8 }, (_, j) => j + 1);
     </div>
     <div class="order-1 flex justify-end pr-2 md:order-2 md:col-span-5 md:justify-center md:pr-0">
       <div class="hb-stage" style={`--blob:${BLOB_MASK}`} aria-hidden="true">
+        <div class="hb-glow"></div>
         <div class="hb-shadow"></div>
         <div class="hb-scroll">
           <div class="hb-tilt" data-tilt>
