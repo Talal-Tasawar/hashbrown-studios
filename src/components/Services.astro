@@ -1,0 +1,33 @@
+---
+import Icon from "./Icon.astro";
+const services = [
+  { name: "Web design", body: "Clear structure, sharp visuals and copy that sells. Designed in Figma and reviewed as real pages before any code is written.", tags: ["UX and sitemaps", "UI design", "Design systems", "Clickable prototypes"] },
+  { name: "Development", body: "Hand-built sites on Astro, Next.js or WordPress. Fast on budget phones and easy for your team to update.", tags: ["Astro and Next.js", "WordPress", "CMS setup", "Integrations"] },
+  { name: "E-commerce", body: "Shopify and custom stores with product pages that tell the story, local payment options and a checkout that does not leak sales.", tags: ["Shopify", "Product pages", "JazzCash and cards", "Analytics"] },
+  { name: "Brand identity", body: "Logo, colour and type, plus the simple rules that keep them consistent across your site, socials and print.", tags: ["Logo design", "Visual identity", "Brand guidelines", "Social templates"] },
+  { name: "SEO and speed", body: "Technical SEO, Core Web Vitals and local search, so the right people find you and the page loads before they leave.", tags: ["Technical SEO", "Core Web Vitals", "Google Business Profile", "Search Console"] },
+  { name: "Care plans", body: "Hosting on Cloudflare, updates, backups and a block of edits every month. Send one message and it gets handled.", tags: ["Hosting", "Updates and backups", "Monthly edits", "Uptime monitoring"] },
+];
+---
+<section id="services" class="cv py-24 md:py-36">
+  <div class="wrap">
+    <h2 class="h2 rv max-w-4xl">What we do</h2>
+    <div class="mt-12 border-t border-line md:mt-20">
+      {services.map((s, i) => (
+        <details name="services" class="svc-row border-b border-line" open={i === 0}>
+          <summary class="flex items-center gap-4 py-6 md:gap-6 md:py-8">
+            <span class="w-7 shrink-0 text-sm tabular-nums text-muted md:w-14">{String(i + 1).padStart(2, "0")}</span>
+            <span class="svc-name text-[clamp(1.6rem,4.6vw,4.25rem)] font-bold leading-none tracking-[-0.03em]">{s.name}</span>
+            <span class="svc-plus ml-auto grid size-11 shrink-0 place-items-center rounded-full shadow-[inset_0_0_0_1px_var(--line)] md:size-14"><Icon name="plus" class="size-5" /></span>
+          </summary>
+          <div class="grid gap-6 pb-10 pl-11 md:grid-cols-12 md:pl-20">
+            <p class="max-w-[52ch] text-[1.1rem] text-muted md:col-span-6">{s.body}</p>
+            <ul class="flex flex-wrap content-start gap-2 md:col-span-5 md:col-start-8">
+              {s.tags.map((t) => <li class="rounded-full bg-surface px-4 py-2 text-[0.95rem]">{t}</li>)}
+            </ul>
+          </div>
+        </details>
+      ))}
+    </div>
+  </div>
+</section>

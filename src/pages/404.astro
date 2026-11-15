@@ -1,0 +1,16 @@
+---
+import Base from "../layouts/Base.astro";
+import Icon from "../components/Icon.astro";
+import Logo from "../components/Logo.astro";
+---
+<Base title="Page not found | Hashbrown Studios" description="This page does not exist. Head back to the Hashbrown Studios homepage to see our work or book a call." path={null}>
+  <main id="main" class="wrap flex min-h-[100dvh] flex-col items-start justify-center gap-8 py-24">
+    <a href="/" aria-label="Hashbrown Studios homepage"><Logo id="nf-logo" class="size-14" /></a>
+    <h1 class="display text-[clamp(3rem,8vw,7rem)]">Page not found</h1>
+    <p class="lede">The page you were looking for does not exist or has moved. Everything we do lives on the homepage.</p>
+    <div class="flex flex-wrap gap-3">
+      <a class="btn btn-primary" href="/"><span>Go to homepage</span><span class="btn-ico"><Icon name="arrow-up-right" /></span></a>
+      <a class="btn btn-ghost" href="/#book"><span>Book a call</span><span class="btn-ico"><Icon name="arrow-up-right" /></span></a>
+    </div>
+  </main>
+</Base>

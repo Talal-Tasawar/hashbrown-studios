@@ -1,0 +1,19 @@
+---
+import arrowUpRight from "@phosphor-icons/core/assets/light/arrow-up-right-light.svg?raw";
+import arrowUp from "@phosphor-icons/core/assets/light/arrow-up-light.svg?raw";
+import plus from "@phosphor-icons/core/assets/light/plus-light.svg?raw";
+import whatsapp from "@phosphor-icons/core/assets/light/whatsapp-logo-light.svg?raw";
+import envelope from "@phosphor-icons/core/assets/light/envelope-simple-light.svg?raw";
+import instagram from "@phosphor-icons/core/assets/light/instagram-logo-light.svg?raw";
+import mapPin from "@phosphor-icons/core/assets/light/map-pin-light.svg?raw";
+import phone from "@phosphor-icons/core/assets/light/phone-light.svg?raw";
+import sun from "@phosphor-icons/core/assets/light/sun-light.svg?raw";
+import moon from "@phosphor-icons/core/assets/light/moon-light.svg?raw";
+import mapTrifold from "@phosphor-icons/core/assets/light/map-trifold-light.svg?raw";
+
+const icons = { "arrow-up-right": arrowUpRight, "arrow-up": arrowUp, plus, whatsapp, envelope, instagram, "map-pin": mapPin, phone, sun, moon, "map-trifold": mapTrifold };
+interface Props { name: keyof typeof icons; class?: string }
+const { name, class: cls = "size-5" } = Astro.props;
+const svg = icons[name].replace("<svg ", `<svg class="${cls}" aria-hidden="true" focusable="false" `);
+---
+<Fragment set:html={svg} />

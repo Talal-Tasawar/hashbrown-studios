@@ -1,0 +1,36 @@
+---
+import Icon from "./Icon.astro";
+import Logo from "./Logo.astro";
+import { CONTACT } from "../lib/brand";
+const links = [
+  { href: "#work", label: "Work" },
+  { href: "#services", label: "Services" },
+  { href: "#process", label: "Process" },
+  { href: "#studio", label: "Studio" },
+  { href: "#book", label: "Book a call" },
+];
+---
+<footer class="cv overflow-hidden border-t border-line pt-16 md:pt-24">
+  <div class="wrap grid gap-12 md:grid-cols-12">
+    <div class="md:col-span-5">
+      <Logo id="ft-logo" class="size-14" />
+      <p class="mt-6 max-w-[34ch] text-[1.15rem] text-muted">A web design and development studio in Islamabad, working with brands everywhere.</p>
+    </div>
+    <nav aria-label="Footer" class="md:col-span-3 md:col-start-7">
+      <ul class="grid gap-2">
+        {links.map((l) => <li><a href={l.href} class="text-[1.05rem] transition-colors hover:text-accent-ink">{l.label}</a></li>)}
+      </ul>
+    </nav>
+    <div class="grid content-start gap-2 md:col-span-3">
+      <a href={`mailto:${CONTACT.email}`} class="text-[1.05rem] transition-colors hover:text-accent-ink">{CONTACT.email}</a>
+      <a href={CONTACT.phoneHref} class="text-[1.05rem] transition-colors hover:text-accent-ink">{CONTACT.phoneDisplay}</a>
+      <a href={CONTACT.instagram} target="_blank" rel="noopener noreferrer" class="text-[1.05rem] transition-colors hover:text-accent-ink">Instagram</a>
+      <p class="text-muted">{CONTACT.address}</p>
+    </div>
+  </div>
+  <div class="wrap mt-16 flex flex-wrap items-center justify-between gap-4 text-sm text-muted md:mt-24">
+    <p>&copy; {new Date().getFullYear()} Hashbrown Studios</p>
+    <a href="#main" class="inline-flex items-center gap-2 rounded-full py-2 transition-colors hover:text-ink">Back to top <Icon name="arrow-up" class="size-4" /></a>
+  </div>
+  <p translate="no" class="wordmark wrap mt-6 select-none pb-[0.6vw] text-accent" aria-hidden="true">Hashbrown</p>
+</footer>

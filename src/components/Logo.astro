@@ -1,0 +1,22 @@
+---
+import { BLOB } from "../lib/brand";
+interface Props { id: string; class?: string; dot?: boolean }
+const { id, class: cls, dot = true } = Astro.props;
+---
+<svg viewBox="-2 -2 104 104" class={cls} aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id={`${id}-g`} x1="0.3" y1="0" x2="0.7" y2="1">
+      <stop offset="0" stop-color="#EDBE72" />
+      <stop offset="1" stop-color="#C97B3A" />
+    </linearGradient>
+    <clipPath id={`${id}-c`}><path d={BLOB} /></clipPath>
+    <pattern id={`${id}-p`} width="12.5" height="12.5" patternUnits="userSpaceOnUse" patternTransform="rotate(48)">
+      <rect width="3.6" height="12.5" fill="#5A3412" fill-opacity=".3" />
+      <rect width="12.5" height="3.6" fill="#5A3412" fill-opacity=".3" />
+    </pattern>
+  </defs>
+  <path d={BLOB} fill={`url(#${id}-g)`} />
+  <rect x="-2" y="-2" width="104" height="104" fill={`url(#${id}-p)`} clip-path={`url(#${id}-c)`} />
+  <path d={BLOB} fill="none" stroke="#6B4520" stroke-opacity=".35" stroke-width=".7" />
+  {dot && <ellipse cx="81" cy="79" rx="11.3" ry="8.8" fill="#C1692C" />}
+</svg>

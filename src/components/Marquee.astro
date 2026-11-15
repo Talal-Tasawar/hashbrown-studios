@@ -1,0 +1,18 @@
+---
+const words = ["Web design", "Development", "E-commerce", "Brand identity", "SEO", "Care plans"];
+---
+<section aria-label="What we offer" class="marquee-band cv overflow-hidden border-y border-line py-6 md:py-9">
+  <p class="sr-only">{words.join(", ")}</p>
+  <div class="marquee" aria-hidden="true">
+    {[0, 1].map((k) => (
+      <div class="marquee-set">
+        {words.map((w, i) => (
+          <Fragment>
+            <span class:list={["whitespace-nowrap text-[clamp(2rem,5.2vw,4.75rem)] leading-none tracking-[-0.03em]", i % 2 ? "font-light [font-stretch:62%]" : "font-extrabold [font-stretch:125%]"]}>{w}</span>
+            <img src="/favicon.svg" alt="" width="52" height="52" decoding="async" class="size-[clamp(1.75rem,3.6vw,3.25rem)] shrink-0" />
+          </Fragment>
+        ))}
+      </div>
+    ))}
+  </div>
+</section>
