@@ -1,0 +1,36 @@
+---
+import Logo from "./Logo.astro";
+import Icon from "./Icon.astro";
+interface Props {
+  cta: string;
+  /** true on the homepage, where section links are same-page anchors */
+  home?: boolean;
+}
+const { cta, home = false } = Astro.props;
+const p = home ? "" : "/";
+const links: [string, string][] = [
+  [`${p}#templates`, "Solutions"],
+  ["/platform/", "Platform"],
+  [`${p}#work`, "Clients"],
+  [`${p}#about`, "About"],
+];
+---
+<header class="hb-header" data-header>
+  <div class="hb-header-inner">
+    <Logo />
+    <nav class="hb-nav" aria-label="Primary">
+      {links.map(([href, label]) => <a href={href}>{label}</a>)}
+    </nav>
+    <a class="hb-button hb-button-dark hb-header-cta" href={cta} target="_blank" rel="noopener noreferrer">
+      Discuss early access <Icon name="arrow-up-right" />
+    </a>
+    <details class="hb-mobile-nav">
+      <summary aria-label="Open navigation"><span></span><span></span></summary>
+      <nav aria-label="Mobile">
+        {links.map(([href, label]) => <a href={href}>{label}</a>)}
+        <a href={`${p}#contact`}>Contact</a>
+        <a class="hb-button hb-button-dark" href={cta} target="_blank" rel="noopener noreferrer">Discuss early access <Icon name="arrow-up-right" /></a>
+      </nav>
+    </details>
+  </div>
+</header>

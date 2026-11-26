@@ -1,0 +1,35 @@
+---
+import Logo from "./Logo.astro";
+import { CONTACT } from "../lib/brand";
+interface Props {
+  home?: boolean;
+}
+const { home = false } = Astro.props;
+const p = home ? "" : "/";
+---
+<footer class="hb-footer">
+  <div class="hb-shell hb-footer-main">
+    <div class="hb-footer-brand">
+      <Logo />
+      <p>Automotive business software,<br />designed in Islamabad.</p>
+    </div>
+    <nav class="hb-footer-nav" aria-label="Footer">
+      <small>Explore</small>
+      <a href={`${p}#templates`}>Solutions</a>
+      <a href="/platform/">Platform</a>
+      <a href={`${p}#work`}>Clients</a>
+      <a href={`${p}#about`}>About</a>
+    </nav>
+    <div class="hb-footer-contact">
+      <small>Contact</small>
+      <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a>
+      <a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a>
+      <span>{CONTACT.address}</span>
+    </div>
+  </div>
+  <div class="hb-shell hb-footer-bottom">
+    <span>© {new Date().getFullYear()} HashBrown Studios</span>
+    <span>Four automotive templates, one platform</span>
+    <a href="#main">Back to top</a>
+  </div>
+</footer>

@@ -1,0 +1,109 @@
+---
+// Illustrative product previews for each template. Sample data only; decorative.
+import CarProfile from "./CarProfile.astro";
+interface Props {
+  slug: string;
+  size?: "card" | "hero";
+}
+const { slug, size = "card" } = Astro.props;
+const uid = `${slug}-${size}`;
+
+const week = [
+  ["Mon", "free"], ["Tue", "booked"], ["Wed", "booked"], ["Thu", "free"],
+  ["Fri", "free"], ["Sat", "booked"], ["Sun", "free"],
+];
+const stock = [
+  ["Honda Civic Oriel", "2021 · 38,400 km · Automatic", "Listed"],
+  ["Toyota Yaris 1.3", "2022 · 21,900 km · Manual", "Test drive"],
+  ["Suzuki Swift GLX", "2023 · 9,800 km · Automatic", "Reserved"],
+  ["Kia Sportage AWD", "2021 · 54,200 km · Automatic", "Offer"],
+];
+const board = [
+  ["Inspection", [["Civic 2019", "Brake noise", "AK"], ["Corolla 2017", "AC not cooling", "SR"]]],
+  ["Awaiting approval", [["Hilux 2020", "Clutch replacement", "MN", "Estimate sent"]]],
+  ["In bay", [["Cultus 2018", "Oil and filter", "AK", "Bay 2"], ["City 2021", "Suspension check", "SR", "Bay 1"]]],
+] as const;
+const bays = [
+  ["Bay 1", [["Ceramic coating", 0, 6]]],
+  ["Bay 2", [["Interior deep clean", 0, 3], ["Wash and wax", 4, 3]]],
+  ["Bay 3", [["PPF · front end", 1, 7]]],
+] as const;
+---
+<div class:list={["tp", `tp-${slug}`, `tp-${size}`]} aria-hidden="true">
+  {slug === "rent-a-car" && (
+    <>
+      <div class="tp-stage">
+        <span class="tp-chip tp-glass tp-chip-tl"><i class="tp-live"></i>360° · Exterior</span>
+        <span class="tp-chip tp-glass tp-chip-tr">Cabin 360°</span>
+        <div class="tp-turntable">
+          <span class="tp-orbit"><i></i></span>
+          <CarProfile id={uid} class="tp-car" />
+        </div>
+      </div>
+      <div class="tp-panel tp-glass">
+        <div class="tp-panel-head">
+          <div><b>Toyota Corolla Altis</b><small>2022 · Automatic · Self-drive or chauffeur</small></div>
+          <span class="tp-tag">Available</span>
+        </div>
+        <ol class="tp-week">
+          {week.map(([d, s]) => <li class={`is-${s}`}><small>{d}</small><i></i></li>)}
+        </ol>
+      </div>
+    </>
+  )}
+
+  {slug === "used-car-showrooms" && (
+    <>
+      <div class="tp-window">
+        <div class="tp-toolbar"><b>Inventory</b><span class="tp-search">Search make or model</span><span class="tp-count">24 listed</span></div>
+        <ul class="tp-stock-list">
+          {stock.map(([name, meta, status], i) => (
+            <li>
+              <span class={`tp-thumb tp-thumb-${i}`}></span>
+              <span class="tp-stock-text"><b>{name}</b><small>{meta}</small></span>
+              <span class={`tp-tag tp-tag-${status.toLowerCase().replace(" ", "-")}`}>{status}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="tp-float tp-glass"><i class="tp-live"></i><span><b>Test drive booked</b><small>Toyota Yaris · Sat 11:00</small></span></div>
+    </>
+  )}
+
+  {slug === "workshops" && (
+    <div class="tp-board">
+      {board.map(([col, cards]) => (
+        <div class="tp-col">
+          <div class="tp-col-head"><b>{col}</b><span>{cards.length}</span></div>
+          {cards.map((c) => (
+            <div class="tp-job">
+              <b>{c[0]}</b>
+              <small>{c[1]}</small>
+              <div class="tp-job-foot">
+                <span class="tp-avatar">{c[2]}</span>
+                {c[3] && <span class="tp-tag">{c[3]}</span>}
+              </div>
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  )}
+
+  {slug === "car-detailing" && (
+    <div class="tp-schedule">
+      <div class="tp-hours"><span></span>{["9", "11", "13", "15", "17"].map((h) => <small>{h}:00</small>)}</div>
+      {bays.map(([bay, jobs]) => (
+        <div class="tp-bay">
+          <b>{bay}</b>
+          <div class="tp-track">
+            {jobs.map(([name, start, len]) => (
+              <span class="tp-block" style={`--s:${start};--l:${len}`}><b>{name}</b><small>{len}h</small></span>
+            ))}
+          </div>
+        </div>
+      ))}
+      <span class="tp-now" style="--t:3.4"><i></i></span>
+    </div>
+  )}
+</div>

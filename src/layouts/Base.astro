@@ -1,19 +1,79 @@
 ---
-import "../styles/global.css";
-import "../styles/rebrand.css";
+import "../styles/site.css";
 import { CONTACT } from "../lib/brand";
-interface Props { title?: string; description?: string; path?: string | null; }
-const {title="HashBrown Studios — Automotive Business Software",description="HashBrown Studios is building specialist business platforms for rent-a-car companies, used car showrooms, automotive workshops and car detailing studios.",path="/"}=Astro.props;
-const home=new URL("/",Astro.site).href;
-const url=path===null?null:new URL(path,Astro.site).href;
-const ogImage=new URL("/og.jpg",Astro.site).href;
-const jsonLd={"@context":"https://schema.org","@type":"Organization",name:"HashBrown Studios",url:home,logo:new URL("/apple-touch-icon.png",Astro.site).href,image:ogImage,description,email:CONTACT.email,telephone:"+92-364-4915188",address:{"@type":"PostalAddress",addressLocality:"Islamabad",addressCountry:"PK"},sameAs:[CONTACT.instagram]};
+interface Props {
+  title?: string;
+  description?: string;
+  path?: string | null;
+}
+const {
+  title = "HashBrown Studios — Automotive Business Software",
+  description = "HashBrown Studios is building specialist business platforms for rent-a-car companies, used car showrooms, automotive workshops and car detailing studios.",
+  path = "/",
+} = Astro.props;
+const home = new URL("/", Astro.site).href;
+const url = path === null ? null : new URL(path, Astro.site).href;
+const ogImage = new URL("/og.jpg", Astro.site).href;
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "HashBrown Studios",
+  url: home,
+  logo: new URL("/apple-touch-icon.png", Astro.site).href,
+  image: ogImage,
+  description,
+  email: CONTACT.email,
+  telephone: "+92-364-4915188",
+  address: { "@type": "PostalAddress", addressLocality: "Islamabad", addressCountry: "PK" },
+  sameAs: [CONTACT.instagram],
+};
 ---
 <!doctype html>
-<html lang="en"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1"/><meta name="theme-color" content="#f3f3ef"/>
-<title>{title}</title><meta name="description" content={description}/>{url&&<link rel="canonical" href={url}/>}
-<meta property="og:type" content="website"/>{url&&<meta property="og:url" content={url}/>}<meta property="og:site_name" content="HashBrown Studios"/><meta property="og:image" content={ogImage}/><meta property="og:title" content={title}/><meta property="og:description" content={description}/><meta name="twitter:card" content="summary_large_image"/>
-<link rel="icon" href="/favicon.svg" type="image/svg+xml"/><link rel="apple-touch-icon" href="/apple-touch-icon.png"/><link rel="sitemap" href="/sitemap.xml"/><link rel="preload" href="/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin/>
-<script type="application/ld+json" set:html={JSON.stringify(jsonLd)}/><slot name="head"/>
-</head><body><a href="#main" class="hb-skip">Skip to content</a><slot/></body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f3f3ef" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {url && <link rel="canonical" href={url} />}
+    <meta property="og:type" content="website" />
+    {url && <meta property="og:url" content={url} />}
+    <meta property="og:site_name" content="HashBrown Studios" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <link rel="preload" href="/fonts/archivo-wdth.woff2" as="font" type="font/woff2" crossorigin />
+    <script is:inline>
+      // Enable reveal animations only when JS runs and the visitor hasn't asked for reduced motion.
+      if (!matchMedia("(prefers-reduced-motion: reduce)").matches) document.documentElement.classList.add("hb-motion");
+    </script>
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+    <slot name="head" />
+  </head>
+  <body>
+    <a href="#main" class="hb-skip">Skip to content</a>
+    <slot />
+    <script is:inline>
+      (() => {
+        const root = document.documentElement;
+        const header = document.querySelector("[data-header]");
+        const onScroll = () => header && header.classList.toggle("is-scrolled", scrollY > 12);
+        onScroll();
+        addEventListener("scroll", onScroll, { passive: true });
+        if (!root.classList.contains("hb-motion")) return;
+        const items = document.querySelectorAll("[data-reveal]");
+        if (!("IntersectionObserver" in window)) { items.forEach((el) => el.classList.add("is-in")); return; }
+        const io = new IntersectionObserver((entries) => {
+          for (const e of entries) if (e.isIntersecting) { e.target.classList.add("is-in"); io.unobserve(e.target); }
+        }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+        items.forEach((el) => io.observe(el));
+        addEventListener("beforeprint", () => items.forEach((el) => el.classList.add("is-in")));
+      })();
+    </script>
+  </body>
+</html>

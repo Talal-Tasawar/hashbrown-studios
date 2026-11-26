@@ -1,44 +1,272 @@
 ---
 import { Image } from "astro:assets";
 import { CONTACT } from "../lib/brand";
+import SiteHeader from "./SiteHeader.astro";
+import SiteFooter from "./SiteFooter.astro";
+import TemplatePreview from "./TemplatePreview.astro";
+import Icon from "./Icon.astro";
 import classicLogo from "../assets/clients/classic-detailers.webp";
 import revampLogo from "../assets/clients/revamp-detailing.webp";
 import autopubLogo from "../assets/clients/autopub-detailing.webp";
 import rehanLogo from "../assets/clients/rehan-car-wraps.webp";
+
 const wa = "https://wa.me/" + CONTACT.whatsapp + "?text=" + encodeURIComponent("Hello HashBrown Studios. I operate an automotive business and would like to discuss early access.");
+
 const templates = [
-  ["01","rent-a-car","Rent-a-Car","RENTAL OPERATIONS","Fleet, vehicle media, availability, self-drive and chauffeur bookings, handovers and returns.","FIRST TEMPLATE / EARLY ACCESS"],
-  ["02","used-car-showrooms","Used Car Showrooms","INVENTORY & SALES","Vehicle listings, stock records, buyer enquiries, test drives, offers and the sales pipeline.","PLANNED TEMPLATE"],
-  ["03","workshops","Mechanics & Workshops","REPAIR & SERVICE","Customer vehicles, inspections, estimates, job cards, technicians and service history.","PLANNED TEMPLATE"],
-  ["04","car-detailing","Car Detailing Studios","DETAILING OPERATIONS","Service packages, add-ons, bay scheduling, intake checks, job progress and before/after media.","PLANNED TEMPLATE"]
+  { n: "01", slug: "rent-a-car", name: "Rent-a-Car", label: "Rental operations", text: "Fleet, 360° vehicle media, availability, self-drive and chauffeur bookings, handovers and returns.", status: "First template · Early access", live: true },
+  { n: "02", slug: "used-car-showrooms", name: "Used Car Showrooms", label: "Inventory and sales", text: "Vehicle listings, stock records, buyer enquiries, test drives, offers and the sales pipeline.", status: "Planned", live: false },
+  { n: "03", slug: "workshops", name: "Mechanics & Workshops", label: "Repair and service", text: "Vehicle intake, inspections, estimates, job cards, technicians and service history.", status: "Planned", live: false },
+  { n: "04", slug: "car-detailing", name: "Car Detailing Studios", label: "Detailing operations", text: "Service packages, add-ons, bay scheduling, intake checks, job progress and before-and-after media.", status: "Planned", live: false },
 ];
 const clients = [
   ["Classic Detailers", classicLogo],
   ["Revamp Detailing", revampLogo],
   ["AutoPub Detailing", autopubLogo],
   ["Rehan Car Wraps", rehanLogo],
+] as const;
+const fleet = [
+  ["Toyota Corolla", "2022 · ABC-482", "On rental", "Returns 18:00", "rental"],
+  ["Honda Civic", "2021 · LEA-917", "Available", "Ready", "free"],
+  ["Toyota Fortuner", "2023 · ICT-205", "Chauffeur", "Airport 14:30", "driver"],
+  ["Suzuki Cultus", "2020 · RIQ-338", "Service", "Back Thu", "service"],
+];
+const bars = [52, 61, 58, 70, 66, 78, 74];
+const process = [
+  ["01", "Listen to operators", "Understand how the business handles customers, inventory, bookings, jobs and payments today."],
+  ["02", "Map the real workflow", "Define roles, exceptions and hand-offs before deciding what the software should do."],
+  ["03", "Build and pilot", "Develop the shared platform and test the first template with real businesses and realistic scenarios."],
+  ["04", "Refine what works", "Use feedback and measured usage to improve the product before expanding into the next template."],
 ];
 const faqs = [
- ["Are the four software templates available yet?","No. Nothing has been released yet. The platform and its four templates are open for early access, so automotive businesses can discuss their workflows before the first release."],
- ["Which industries are you building for?","Rent-a-car companies, used car showrooms, mechanics and automotive workshops, and car detailing studios. Rent-a-Car is first in the development sequence."],
- ["Will each business get its own website and branding?","That is the product direction. Each business is intended to have a tenant-branded customer website, its own data and a private management dashboard. Custom domains are part of the planned white-label capability."],
- ["What is different about the Rent-a-Car template?","It is designed to connect the public vehicle catalogue with fleet availability, self-drive and chauffeur bookings, quotations, handovers, returns and operational records. Published rental vehicles are planned to require approved exterior and interior 360-degree media."],
- ["How can I get involved?","If you operate one of these businesses, contact us to discuss an early-access conversation. A pilot, its scope and any pricing will be agreed directly; no release date is being promised yet."]
+  ["Are the four software templates available yet?", "No. Nothing has been released yet. The platform and its four templates are open for early access, so automotive businesses can discuss their workflows before the first release."],
+  ["Which industries are you building for?", "Rent-a-car companies, used car showrooms, mechanics and automotive workshops, and car detailing studios. Rent-a-Car is first in the development sequence."],
+  ["Will each business get its own website and branding?", "That is the product direction. Each business is intended to have a tenant-branded customer website, its own data and a private management dashboard. Custom domains are part of the planned white-label capability."],
+  ["What is different about the Rent-a-Car template?", "It is designed to connect the public vehicle catalogue with fleet availability, self-drive and chauffeur bookings, quotations, handovers, returns and operational records. Published rental vehicles are planned to require approved exterior and interior 360-degree media."],
+  ["How can I get involved?", "If you operate one of these businesses, contact us to discuss early access. A pilot, its scope and any pricing will be agreed directly; no release date is being promised yet."],
 ];
 ---
 <div class="hb-site">
-<header class="hb-header"><div class="hb-header-inner"><a class="hb-wordmark" href="/"><span class="hb-mark">hb</span><span>HashBrown<small>STUDIOS</small></span></a><nav class="hb-nav"><a href="#templates">Solutions</a><a href="/platform/">Platform</a><a href="#work">Selected work</a><a href="#about">About</a></nav><a class="hb-button hb-button-dark hb-header-cta" href={wa} target="_blank" rel="noopener noreferrer">Discuss early access ↗</a><details class="hb-mobile-nav"><summary aria-label="Open navigation"><span></span><span></span></summary><nav><a href="#templates">Solutions</a><a href="/platform/">Platform</a><a href="#work">Selected work</a><a href="#about">About</a><a href="#contact">Contact</a></nav></details></div></header>
-<main id="main">
-<section class="hb-hero hb-shell"><div><p class="hb-eyebrow"><i></i> AUTOMOTIVE SOFTWARE <b>/</b> EARLY ACCESS</p><h1>Software for the business <span>behind every vehicle.</span></h1><p class="hb-lede">Four specialist platforms for rent-a-car companies, used car showrooms, workshops and detailing studios. Customer websites and business operations, connected in one system.</p><div class="hb-hero-actions"><a class="hb-button hb-button-dark" href="#templates">Explore the systems ↓</a><a class="hb-text-link" href={wa} target="_blank" rel="noopener noreferrer">Talk about early access ↗</a></div><div class="hb-hero-foot"><span>01 — 04</span><span>DESIGNED IN ISLAMABAD, PAKISTAN</span></div></div>
-<div class="hb-hero-visual"><div class="hb-concept-label"><i></i> PLATFORM CONCEPT <span>NOT A LIVE PRODUCT</span></div><div class="hb-window"><div class="hb-window-top"><span>● ● ●</span> FLEET OVERVIEW / CONCEPT <b>HB</b></div><div class="hb-window-body"><aside class="hb-rail"><b>hb</b><i></i><i></i><i></i><i></i></aside><div class="hb-dashboard"><div class="hb-dash-heading"><div><small>WORKSPACE / RENTAL</small><strong>Fleet overview</strong></div><span>TODAY</span></div><div class="hb-metrics"><div><small>FLEET</small><b>—</b><span>Vehicles</span></div><div><small>ON RENTAL</small><b>—</b><span>Active</span></div><div><small>REQUESTS</small><b>—</b><span>To review</span></div></div><div class="hb-records"><div class="hb-record-heading"><b>Vehicle records</b><span>PREVIEW UI</span></div>{["Exterior + cabin media","Availability and rates","Booking and handover"].map((s)=> <div class="hb-record"><i></i><span><b>Vehicle record</b><small>{s}</small></span></div>)}</div><div class="hb-dash-bottom"><span>SHARED PLATFORM</span><span>RENT-A-CAR TEMPLATE</span></div></div></div></div><p class="hb-concept-caption">Illustrative interface direction. Product screens are still being designed.</p></div></section>
-<section class="hb-strip"><div class="hb-shell hb-strip-inner"><span class="hb-strip-label">FOUR SPECIALIST SYSTEMS</span><div>{templates.map(t=><span><i>{t[0]}</i>{t[2]}</span>)}</div></div></section>
-<section id="templates" class="hb-section hb-section-light"><div class="hb-shell"><div class="hb-section-heading"><div><p class="hb-eyebrow">THE PRODUCT FAMILY / 01—04</p><h2>Four industries.<br/><span>Four purpose-built systems.</span></h2></div><p>Each template is shaped around the way that business actually works. The foundations are shared; the workflows are not generic.</p></div><div class="hb-template-grid">{templates.map(t=><a class="hb-template-card" href={"/solutions/"+t[1]+"/"}><div class="hb-template-card-top"><span>{t[0]} / {t[3]}</span><b>↗</b></div><div class={"hb-art hb-art-"+t[1]}><span class="shape-one"></span><span class="shape-two"></span><span class="shape-three"></span><small>{t[1]==="rent-a-car"?"360°":t[1]==="used-car-showrooms"?"STOCK / LIVE":t[1]==="workshops"?"JOB CARD":"FINISH / DETAIL"}</small></div><div class="hb-template-copy"><div><h3>{t[2]}</h3><em>{t[5]}</em></div><p>{t[4]}</p><span class="hb-card-link">Explore template →</span></div></a>)}</div><p class="hb-section-note">All four templates are part of the product roadmap. Rent-a-Car will be the first template taken through discovery and development.</p></div></section>
-<section id="platform" class="hb-section hb-section-paper"><div class="hb-shell hb-platform-preview"><div><p class="hb-eyebrow">ONE SHARED PLATFORM</p><h2>Different workflows.<br/><span>One connected foundation.</span></h2><p>Each business is intended to receive its own branded customer website and private dashboard. Tenant-specific data and industry workflows stay separate, while common capabilities are developed once.</p><a class="hb-text-link" href="/platform/">Explore the platform architecture ↗</a></div><div class="hb-platform-stack"><article><span>01</span><div><b>Customer website</b><small>Browse · enquire · request · book</small></div></article><article><span>02</span><div><b>Business dashboard</b><small>Customers · inventory · operations</small></div></article><article><span>03</span><div><b>HashBrown platform</b><small>Tenants · templates · administration</small></div></article><small class="hb-platform-label">PLANNED PRODUCT ARCHITECTURE / NOT LIVE</small></div></div></section>
-<section id="work" class="hb-section hb-section-light"><div class="hb-shell"><div class="hb-section-heading"><div><p class="hb-eyebrow">SELECTED CLIENTS</p><h2>Our work in<br/><span>the automotive space.</span></h2></div><p>Automotive businesses we have designed and built websites for. This client work is separate from the new management platform, which is open for early access.</p></div><ul class="hb-client-grid">{clients.map(([name, logo]) => <li class="hb-client"><div class="hb-client-logo"><Image src={logo} alt={name + " logo"} widths={[240, 480]} sizes="(min-width: 900px) 22vw, 44vw" loading="lazy" decoding="async"/></div><p>{name}</p></li>)}</ul></div></section>
-<section class="hb-section hb-section-dark"><div class="hb-shell"><div class="hb-section-heading hb-dark-heading"><div><p class="hb-eyebrow">A PRACTICAL PRODUCT PROCESS</p><h2>Designed around<br/><span>the work, not the buzzwords.</span></h2></div><p>We are building from the workflow outward: understand the operation, define the rules, test the product and improve it with the people who use it.</p></div><div class="hb-process-grid"><article><small>01</small><h3>Listen to operators</h3><p>Understand how the business handles customers, inventory, bookings, jobs and payments today.</p></article><article><small>02</small><h3>Map the real workflow</h3><p>Define roles, exceptions and hand-offs before deciding what the software should do.</p></article><article><small>03</small><h3>Build and pilot</h3><p>Develop the shared platform and test the first template with real businesses and realistic scenarios.</p></article><article><small>04</small><h3>Refine what works</h3><p>Use feedback and measured usage to improve the product before expanding into the next template.</p></article></div><div class="hb-process-foot"><span>HASHBROWN STUDIOS / ISLAMABAD, PAKISTAN</span><span>PRODUCT DEVELOPMENT / 2026—</span></div></div></section>
-<section id="about" class="hb-section hb-section-light"><div class="hb-shell hb-about-grid"><div class="hb-about-index"><p class="hb-eyebrow">ABOUT HASHBROWN</p><strong>ISB<br/>PK</strong></div><div class="hb-about-main"><h2>We started by building for automotive businesses. Now we’re building the systems behind them.</h2><p>HashBrown Studios is an Islamabad-based digital studio with hands-on experience creating websites and customer journeys for detailing, wrapping and car-care businesses.</p><p>That work exposed a bigger opportunity: the customer-facing website is only one part of the operation. Enquiries, inventory, bookings, staff and follow-ups need to work together too. Our next chapter is focused on building reusable software for those workflows.</p><a class="hb-text-link" href="#work">See selected projects ↗</a></div><aside class="hb-about-note"><small>01 / OUR POINT OF VIEW</small><p>Useful software should make everyday work clearer, not add another system employees have to fight.</p></aside></div></section>
-<section class="hb-section hb-section-paper"><div class="hb-shell hb-faq-grid"><div><p class="hb-eyebrow">GOOD QUESTIONS</p><h2>Before we build<br/><span>anything else.</span></h2><p class="hb-faq-intro">Straight answers about what exists today and what is still to come.</p></div><div class="hb-faq-list">{faqs.map((f,i)=><details open={i===0}><summary>{f[0]}<i>+</i></summary><p>{f[1]}</p></details>)}</div></div></section>
-<section id="contact" class="hb-contact-section"><div class="hb-shell hb-contact-panel"><div class="hb-contact-kicker"><i></i> EARLY-ACCESS CONVERSATIONS</div><div class="hb-contact-content"><div><p class="hb-eyebrow">BUILD WITH OPERATORS</p><h2>Run an automotive business?<br/><span>Let’s compare notes.</span></h2></div><div><p>Tell us how your operation works.</p><a class="hb-button hb-button-light" href={wa} target="_blank" rel="noopener noreferrer">Start a conversation ↗</a><a class="hb-contact-email" href={"mailto:"+CONTACT.email}>{CONTACT.email}</a></div></div><div class="hb-contact-foot"><span>HASHBROWN STUDIOS</span><span>ISLAMABAD / PAKISTAN</span></div></div></section>
-</main>
-<footer class="hb-footer"><div class="hb-shell hb-footer-main"><a class="hb-wordmark" href="/"><span class="hb-mark">hb</span><span>HashBrown<small>STUDIOS</small></span></a><p>Automotive business software,<br/>designed in Islamabad.</p><nav><a href="#templates">Solutions</a><a href="/platform/">Platform</a><a href="#work">Selected work</a><a href="#about">About</a><a href="#contact">Contact</a></nav><div><a href={"mailto:"+CONTACT.email}>{CONTACT.email}</a><a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a><span>{CONTACT.address}</span></div></div><div class="hb-shell hb-footer-bottom"><span>© {new Date().getFullYear()} HASHBROWN STUDIOS</span><span>FOUR AUTOMOTIVE TEMPLATES / ONE PLATFORM</span><a href="#main">BACK TO TOP ↑</a></div></footer>
+  <SiteHeader cta={wa} home />
+
+  <main id="main">
+    <section class="hb-hero hb-shell">
+      <div class="hb-hero-copy">
+        <p class="hb-eyebrow" data-reveal><i class="hb-dot"></i>Automotive software · Early access</p>
+        <h1 data-reveal style="--i:1">Software for the business <span>behind every vehicle.</span></h1>
+        <p class="hb-lede" data-reveal style="--i:2">Specialist platforms for rent-a-car companies, used car showrooms, workshops and detailing studios. A branded customer website and the operations behind it, connected in one system.</p>
+        <div class="hb-hero-actions" data-reveal style="--i:3">
+          <a class="hb-button hb-button-dark" href="#templates">Explore the systems <Icon name="arrow-down" /></a>
+          <a class="hb-text-link" href={wa} target="_blank" rel="noopener noreferrer">Talk about early access <Icon name="arrow-up-right" /></a>
+        </div>
+        <dl class="hb-hero-facts" data-reveal style="--i:4">
+          <div><dt>4</dt><dd>industry templates</dd></div>
+          <div><dt>1</dt><dd>shared platform</dd></div>
+          <div><dt>ISB</dt><dd>designed in Islamabad</dd></div>
+        </dl>
+      </div>
+
+      <div class="hb-hero-visual" data-reveal="rise" style="--i:2">
+        <div class="hb-app" aria-label="Concept of the Rent-a-Car fleet dashboard, with sample data" role="img">
+          <div class="hb-app-top">
+            <span class="hb-app-dots"><i></i><i></i><i></i></span>
+            <span class="hb-app-url">fleet.yourbrand.pk</span>
+            <span class="hb-app-label">Concept · sample data</span>
+          </div>
+          <div class="hb-app-body">
+            <aside class="hb-app-rail">
+              <svg viewBox="0 0 64 64" class="hb-app-mark"><rect width="64" height="64" rx="15" /><path d="M20.6 14h7.6l-6.7 36h-7.6zM36.4 14H44l-6.7 36h-7.6zM24.6 26.5H54l-1 4H23.85zM23.1 34.5H50l-1 4H22.35z" /></svg>
+              <i class="is-on"></i><i></i><i></i><i></i><i></i>
+            </aside>
+            <div class="hb-app-main">
+              <div class="hb-app-head">
+                <div><small>Rent-a-Car · Today</small><strong>Fleet overview</strong></div>
+                <span class="hb-app-btn">+ Add vehicle</span>
+              </div>
+              <div class="hb-kpis">
+                <div><small>Fleet</small><b>48</b><span>vehicles</span></div>
+                <div><small>On rental</small><b>31</b><span>65% utilised</span></div>
+                <div><small>Requests</small><b>6</b><span>to review</span></div>
+              </div>
+              <div class="hb-app-grid">
+                <div class="hb-fleet">
+                  <div class="hb-fleet-head"><span>Vehicle</span><span>Status</span><span>Next</span></div>
+                  {fleet.map(([car, meta, status, next, tone]) => (
+                    <div class="hb-fleet-row">
+                      <span><b>{car}</b><small>{meta}</small></span>
+                      <span class={`hb-state hb-state-${tone}`}>{status}</span>
+                      <span class="hb-fleet-next">{next}</span>
+                    </div>
+                  ))}
+                </div>
+                <div class="hb-util">
+                  <small>Utilisation · 7 days</small>
+                  <div class="hb-bars">{bars.map((h, i) => <i style={`--h:${h}%;--i:${i}`}></i>)}</div>
+                  <div class="hb-util-foot"><b>78%</b><span>peak Saturday</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="hb-float hb-float-a tp-glass">
+          <span class="hb-float-icon"><i class="hb-dot"></i></span>
+          <span><b>New booking request</b><small>Toyota Fortuner · 3 days · Chauffeur</small></span>
+          <span class="hb-float-cta">Review</span>
+        </div>
+        <div class="hb-float hb-float-b tp-glass">
+          <span class="hb-float-icon hb-float-360">360°</span>
+          <span><b>Media approved</b><small>Honda Civic · exterior and cabin</small></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="hb-strip" aria-label="The four systems">
+      <div class="hb-shell hb-strip-inner">
+        <span class="hb-strip-label">Four specialist systems</span>
+        <ul>{templates.map((t) => <li><i>{t.n}</i>{t.name}</li>)}</ul>
+      </div>
+    </section>
+
+    <section id="templates" class="hb-section hb-section-light">
+      <div class="hb-shell">
+        <div class="hb-section-heading" data-reveal>
+          <div>
+            <p class="hb-eyebrow">The product family · 01–04</p>
+            <h2>Four industries.<br /><span>Four purpose-built systems.</span></h2>
+          </div>
+          <p>Each template is shaped around the way that business actually works. The foundations are shared; the workflows are not generic.</p>
+        </div>
+        <div class="hb-template-grid">
+          {templates.map((t, i) => (
+            <a class="hb-template-card" href={`/solutions/${t.slug}/`} data-reveal style={`--i:${i % 2}`}>
+              <TemplatePreview slug={t.slug} />
+              <div class="hb-template-copy">
+                <div class="hb-template-meta">
+                  <span class="hb-eyebrow">{t.n} · {t.label}</span>
+                  <span class:list={["hb-status", { "is-live": t.live }]}><i></i>{t.status}</span>
+                </div>
+                <h3>{t.name}</h3>
+                <p>{t.text}</p>
+                <span class="hb-card-link">Explore template <Icon name="arrow-right" /></span>
+              </div>
+            </a>
+          ))}
+        </div>
+        <p class="hb-section-note">Previews are illustrative and use sample data. Rent-a-Car will be the first template taken through discovery and development.</p>
+      </div>
+    </section>
+
+    <section id="platform" class="hb-section hb-section-paper">
+      <div class="hb-shell hb-platform-preview">
+        <div data-reveal>
+          <p class="hb-eyebrow">One shared platform</p>
+          <h2>Different workflows.<br /><span>One connected foundation.</span></h2>
+          <p>Each business is intended to receive its own branded customer website and private dashboard. Tenant data and industry workflows stay separate, while common capabilities are developed once.</p>
+          <a class="hb-text-link" href="/platform/">Explore the platform architecture <Icon name="arrow-right" /></a>
+        </div>
+        <div class="hb-platform-stack">
+          <article data-reveal style="--i:0"><span>01</span><div><b>Customer website</b><small>Browse · enquire · request · book</small></div></article>
+          <article data-reveal style="--i:1"><span>02</span><div><b>Business dashboard</b><small>Customers · inventory · operations</small></div></article>
+          <article data-reveal style="--i:2"><span>03</span><div><b>HashBrown platform</b><small>Tenants · templates · administration</small></div></article>
+          <small class="hb-platform-label">Planned product architecture · not live</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="work" class="hb-section hb-section-light">
+      <div class="hb-shell">
+        <div class="hb-section-heading" data-reveal>
+          <div>
+            <p class="hb-eyebrow">Selected clients</p>
+            <h2>Our work in<br /><span>the automotive space.</span></h2>
+          </div>
+          <p>Automotive businesses we have designed and built websites for. This client work is separate from the new management platform, which is open for early access.</p>
+        </div>
+        <ul class="hb-client-grid">
+          {clients.map(([name, logo], i) => (
+            <li class="hb-client" data-reveal style={`--i:${i}`}>
+              <div class="hb-client-logo"><Image src={logo} alt={name + " logo"} widths={[240, 480]} sizes="(min-width: 900px) 22vw, 44vw" loading="lazy" decoding="async" /></div>
+              <p>{name}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+
+    <section class="hb-section hb-section-dark hb-process">
+      <div class="hb-shell">
+        <div class="hb-section-heading" data-reveal>
+          <div>
+            <p class="hb-eyebrow">A practical product process</p>
+            <h2>Designed around<br /><span>the work, not the buzzwords.</span></h2>
+          </div>
+          <p>We are building from the workflow outward: understand the operation, define the rules, test the product and improve it with the people who use it.</p>
+        </div>
+        <div class="hb-process-grid">
+          {process.map(([n, title, text], i) => (
+            <article class="hb-glass-dark" data-reveal style={`--i:${i}`}>
+              <span>{n}</span>
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="hb-section hb-section-light">
+      <div class="hb-shell hb-about-grid">
+        <div class="hb-about-index" data-reveal>
+          <p class="hb-eyebrow">About HashBrown</p>
+          <strong>ISB<br />PK</strong>
+        </div>
+        <div class="hb-about-main" data-reveal style="--i:1">
+          <h2>We started by building for automotive businesses. <span>Now we’re building the systems behind them.</span></h2>
+          <p>HashBrown Studios is an Islamabad-based digital studio with hands-on experience creating websites and customer journeys for detailing, wrapping and car-care businesses.</p>
+          <p>That work exposed a bigger opportunity: the customer-facing website is only one part of the operation. Enquiries, inventory, bookings, staff and follow-ups need to work together too. Our next chapter is reusable software for those workflows.</p>
+          <a class="hb-text-link" href="#work">See our clients <Icon name="arrow-right" /></a>
+        </div>
+        <aside class="hb-about-note" data-reveal style="--i:2">
+          <small>Our point of view</small>
+          <p>Useful software should make everyday work clearer, not add another system employees have to fight.</p>
+        </aside>
+      </div>
+    </section>
+
+    <section class="hb-section hb-section-paper">
+      <div class="hb-shell hb-faq-grid">
+        <div data-reveal>
+          <p class="hb-eyebrow">Good questions</p>
+          <h2>Before we build<br /><span>anything else.</span></h2>
+          <p class="hb-faq-intro">Straight answers about what exists today and what is still to come.</p>
+        </div>
+        <div class="hb-faq-list" data-reveal style="--i:1">
+          {faqs.map(([q, a], i) => (
+            <details open={i === 0}>
+              <summary>{q}<span class="hb-faq-toggle"><Icon name="plus" /></span></summary>
+              <p>{a}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="hb-contact-section">
+      <div class="hb-shell">
+        <div class="hb-contact-panel" data-reveal>
+          <div class="hb-contact-glow" aria-hidden="true"></div>
+          <p class="hb-eyebrow"><i class="hb-dot"></i>Early-access conversations</p>
+          <div class="hb-contact-content">
+            <h2>Run an automotive business?<br /><span>Let’s compare notes.</span></h2>
+            <div class="hb-contact-card hb-glass-dark">
+              <p>Tell us how your operation works. We’ll show you where the platform is heading and listen to what you need.</p>
+              <a class="hb-button hb-button-light" href={wa} target="_blank" rel="noopener noreferrer">Start a conversation <Icon name="arrow-up-right" /></a>
+              <a class="hb-contact-email" href={"mailto:" + CONTACT.email}>{CONTACT.email}</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <SiteFooter home />
 </div>
