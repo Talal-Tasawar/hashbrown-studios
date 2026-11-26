@@ -13,7 +13,7 @@ export const CONTACT = {
   whatsapp: "923644915188",
   instagram: "https://www.instagram.com/hashbrownstudios/",
   instagramHandle: "@hashbrownstudios",
-  address: "G-11 Markaz, Islamabad, Pakistan",
+  address: "Islamabad, Pakistan",
   mapsLink: "https://www.google.com/maps/search/?api=1&query=33.66877%2C72.99891",
   directions: "https://www.google.com/maps/dir/?api=1&destination=33.66877%2C72.99891",
   // Styled view is centred with no Google marker so the branded pin sits on the spot; the explore view adds Google's marker.
