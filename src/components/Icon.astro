@@ -1,0 +1,16 @@
+---
+// Small stroke icons. The site font subset has no arrow glyphs, so arrows are drawn.
+interface Props {
+  name: "arrow-up-right" | "arrow-right" | "arrow-down" | "arrow-left" | "plus";
+  class?: string;
+}
+const { name, class: className = "" } = Astro.props;
+const paths: Record<Props["name"], string> = {
+  "arrow-up-right": "M7 17 17 7M8 7h9v9",
+  "arrow-right": "M5 12h14M13 6l6 6-6 6",
+  "arrow-down": "M12 5v14M6 13l6 6 6-6",
+  "arrow-left": "M19 12H5M11 6l-6 6 6 6",
+  plus: "M12 5v14M5 12h14",
+};
+---
+<svg class:list={["hb-icon", `hb-icon-${name}`, className]} viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d={paths[name]} /></svg>

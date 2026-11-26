@@ -1,16 +1,91 @@
 ---
 import Base from "../layouts/Base.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import SiteFooter from "../components/SiteFooter.astro";
+import Icon from "../components/Icon.astro";
 import { CONTACT } from "../lib/brand";
-const pilot="https://wa.me/"+CONTACT.whatsapp+"?text="+encodeURIComponent("Hello HashBrown Studios. I'd like to understand the shared platform and early-access programme.");
-const layers=[["01","Customer website","A branded public experience for discovering vehicles or services, submitting enquiries, requesting quotes and making eligible bookings."],["02","Business dashboard","A private workspace for managing customers, inventory, scheduling, quotes, jobs, staff, payment records and reports."],["03","Platform administration","HashBrown's internal tools for provisioning businesses, configuring template entitlements, monitoring usage and supporting tenants."]];
-const shared=["Tenant branding and custom-domain configuration","Customer profiles and enquiry pipeline","Quotes, tasks and operational activity history","Scheduling and resource availability","Media library and controlled file access","Notifications, integrations and reporting"];
+
+const pilot = "https://wa.me/" + CONTACT.whatsapp + "?text=" + encodeURIComponent("Hello HashBrown Studios. I'd like to understand the shared platform and early-access programme.");
+const layers = [
+  ["01", "Customer website", "A branded public experience for discovering vehicles or services, submitting enquiries, requesting quotes and making eligible bookings."],
+  ["02", "Business dashboard", "A private workspace for managing customers, inventory, scheduling, quotes, jobs, staff, payment records and reports."],
+  ["03", "Platform administration", "HashBrown's internal tools for provisioning businesses, configuring template entitlements, monitoring usage and supporting tenants."],
+];
+const shared = [
+  "Tenant branding and custom-domain configuration",
+  "Customer profiles and enquiry pipeline",
+  "Quotes, tasks and operational activity history",
+  "Scheduling and resource availability",
+  "Media library and controlled file access",
+  "Notifications, integrations and reporting",
+];
+const order = ["Rent-a-Car", "Used Car Showrooms", "Mechanics & Workshops", "Car Detailing Studios"];
 ---
 <Base title="The HashBrown Platform — Shared Automotive Software" description="An overview of the shared platform architecture behind HashBrown's four automotive software templates." path="/platform/">
-<div class="hb-site"><header class="hb-header"><div class="hb-header-inner"><a class="hb-wordmark" href="/"><span class="hb-mark">hb</span><span>HashBrown<small>STUDIOS</small></span></a><nav class="hb-nav"><a href="/#templates">Solutions</a><a href="/platform/">Platform</a><a href="/#work">Selected work</a><a href="/#about">About</a></nav><a class="hb-button hb-button-dark hb-header-cta" href={pilot}>Discuss early access ↗</a><details class="hb-mobile-nav"><summary aria-label="Open navigation"><span></span><span></span></summary><nav><a href="/#templates">Solutions</a><a href="/#work">Selected work</a><a href="/#contact">Contact</a></nav></details></div></header>
-<main id="main"><section class="hb-shell hb-platform-hero"><a class="hb-back" href="/">← Home</a><p class="hb-eyebrow">THE SHARED PLATFORM</p><h1>One platform.<br/><span>Four specialist systems.</span></h1><p class="hb-platform-lede">The common foundation behind each HashBrown automotive template: tenant-branded customer websites, private business dashboards and a shared operational engine.</p><span class="hb-status">PLANNED ARCHITECTURE / EARLY ACCESS</span></section>
-<section class="hb-section hb-section-light"><div class="hb-shell"><div class="hb-section-heading"><div><p class="hb-eyebrow">THREE CONNECTED LAYERS</p><h2>Built to work<br/><span>as one system.</span></h2></div><p>Each business has its own workspace and customer-facing brand. Shared platform services are maintained centrally; vertical workflows remain specific to the industry.</p></div><div class="hb-layer-list">{layers.map(l=><article><span>{l[0]}</span><div><h3>{l[1]}</h3><p>{l[2]}</p></div><b>↗</b></article>)}</div></div></section>
-<section class="hb-section hb-section-paper"><div class="hb-shell hb-platform-shared"><div><p class="hb-eyebrow">SHARED CAPABILITIES</p><h2>Build the common parts once.</h2><p>Customer records, permissions, scheduling primitives and notification infrastructure should not be rebuilt separately for each template. The operational rules that make a rental different from a workshop job stay inside their own template modules.</p></div><ul>{shared.map(s=><li><span>+</span>{s}</li>)}</ul></div></section>
-<section class="hb-section hb-section-dark"><div class="hb-shell hb-workflow-grid"><div><p class="hb-eyebrow">DELIVERY ORDER</p><h2>Four templates.<br/><span>Built in sequence.</span></h2></div><ol><li><span>01</span><b>Rent-a-Car</b></li><li><span>02</span><b>Used Car Showrooms</b></li><li><span>03</span><b>Mechanics & Workshops</b></li><li><span>04</span><b>Car Detailing Studios</b></li></ol></div></section>
-<section class="hb-section hb-section-light"><div class="hb-shell hb-scope-note"><small>EARLY ACCESS</small><p>The architecture and product scope are still being defined.</p><a class="hb-button hb-button-dark" href={pilot}>Discuss a pilot ↗</a></div></section></main>
-<footer class="hb-footer"><div class="hb-shell hb-footer-main"><a class="hb-wordmark" href="/"><span class="hb-mark">hb</span><span>HashBrown<small>STUDIOS</small></span></a><p>Automotive business software,<br/>designed in Islamabad.</p><nav><a href="/#templates">Solutions</a><a href="/platform/">Platform</a><a href="/#work">Selected work</a><a href="/#contact">Contact</a></nav><div><a href={"mailto:"+CONTACT.email}>{CONTACT.email}</a><a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a><span>{CONTACT.address}</span></div></div><div class="hb-shell hb-footer-bottom"><span>© {new Date().getFullYear()} HASHBROWN STUDIOS</span><span>FOUR AUTOMOTIVE TEMPLATES / ONE PLATFORM</span><a href="#main">BACK TO TOP ↑</a></div></footer></div>
+<div class="hb-site">
+  <SiteHeader cta={pilot} />
+  <main id="main">
+    <section class="hb-shell hb-platform-hero">
+      <a class="hb-back" href="/"><Icon name="arrow-left" /> Home</a>
+      <p class="hb-eyebrow" data-reveal>The shared platform</p>
+      <h1 data-reveal style="--i:1">One platform.<br /><span>Four specialist systems.</span></h1>
+      <p class="hb-lede" data-reveal style="--i:2">The common foundation behind each HashBrown automotive template: tenant-branded customer websites, private business dashboards and a shared operational engine.</p>
+      <span class="hb-status" data-reveal style="--i:3"><i></i>Planned architecture · Early access</span>
+    </section>
+
+    <section class="hb-section hb-section-light">
+      <div class="hb-shell">
+        <div class="hb-section-heading" data-reveal>
+          <div>
+            <p class="hb-eyebrow">Three connected layers</p>
+            <h2>Built to work<br /><span>as one system.</span></h2>
+          </div>
+          <p>Each business has its own workspace and customer-facing brand. Shared platform services are maintained centrally; vertical workflows remain specific to the industry.</p>
+        </div>
+        <div class="hb-layer-list">
+          {layers.map(([n, title, text], i) => (
+            <article data-reveal style={`--i:${i}`}>
+              <span>{n}</span>
+              <div><h3>{title}</h3><p>{text}</p></div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="hb-section hb-section-paper">
+      <div class="hb-shell hb-platform-shared">
+        <div data-reveal>
+          <p class="hb-eyebrow">Shared capabilities</p>
+          <h2>Build the common parts once.</h2>
+          <p>Customer records, permissions, scheduling and notifications should not be rebuilt separately for each template. The rules that make a rental different from a workshop job stay inside their own template modules.</p>
+        </div>
+        <ul>
+          {shared.map((s, i) => <li data-reveal style={`--i:${i}`}><Icon name="plus" />{s}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="hb-section hb-section-dark">
+      <div class="hb-shell hb-workflow-grid">
+        <div data-reveal>
+          <p class="hb-eyebrow">Delivery order</p>
+          <h2>Four templates.<br /><span>Built in sequence.</span></h2>
+        </div>
+        <ol>
+          {order.map((name, i) => <li class="hb-glass-dark" data-reveal style={`--i:${i}`}><span>0{i + 1}</span><b>{name}</b>{i === 0 && <em>First</em>}</li>)}
+        </ol>
+      </div>
+    </section>
+
+    <section class="hb-section hb-section-light">
+      <div class="hb-shell hb-scope-note" data-reveal>
+        <small>Early access</small>
+        <p>The architecture and product scope are still being defined. Operators who join early help decide what the first release does.</p>
+        <a class="hb-button hb-button-dark" href={pilot} target="_blank" rel="noopener noreferrer">Discuss a pilot <Icon name="arrow-up-right" /></a>
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</div>
 </Base>

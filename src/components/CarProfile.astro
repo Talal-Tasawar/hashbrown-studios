@@ -1,0 +1,29 @@
+---
+// Side-profile sedan used in product previews. `id` keeps gradient ids unique per instance.
+interface Props {
+  id: string;
+  class?: string;
+}
+const { id, class: className = "" } = Astro.props;
+const g = (n: string) => `${id}-${n}`;
+---
+<svg class:list={["hb-car", className]} viewBox="0 0 320 116" aria-hidden="true">
+  <defs>
+    <linearGradient id={g("body")} x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#43463f" /><stop offset=".5" stop-color="#23251f" /><stop offset="1" stop-color="#141512" /></linearGradient>
+    <linearGradient id={g("glass")} x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#d3d6cd" /><stop offset="1" stop-color="#80857c" /></linearGradient>
+    <radialGradient id={g("rim")}><stop offset="0" stop-color="#cfd2c9" /><stop offset=".7" stop-color="#8a8f85" /><stop offset="1" stop-color="#5a5e56" /></radialGradient>
+    <linearGradient id={g("sheen")} x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity="0" /><stop offset=".5" stop-color="#fff" stop-opacity=".22" /><stop offset="1" stop-color="#fff" stop-opacity="0" /></linearGradient>
+    <clipPath id={g("clip")}><path d="M22 84 20 72C20 65 25 61 33 59L66 54C84 40 106 31 136 28L184 27C210 27 230 37 252 50L290 56C301 58 306 64 306 71V80C306 83 304 84 301 84H262A22 22 0 0 0 218 84H100A22 22 0 0 0 56 84Z" /></clipPath>
+  </defs>
+  <ellipse class="hb-car-shadow" cx="160" cy="107" rx="140" ry="5" />
+  <path fill={`url(#${g("body")})`} d="M22 84 20 72C20 65 25 61 33 59L66 54C84 40 106 31 136 28L184 27C210 27 230 37 252 50L290 56C301 58 306 64 306 71V80C306 83 304 84 301 84H262A22 22 0 0 0 218 84H100A22 22 0 0 0 56 84Z" />
+  <path fill={`url(#${g("glass")})`} opacity=".92" d="M84 53C98 42 114 35 138 33L183 32C202 32 218 39 234 51Z" />
+  <rect x="158" y="32" width="5" height="21" fill="#23251f" />
+  <path d="M64 57.5 290 59" stroke="#62665d" stroke-width="1.2" />
+  <path d="M161 56v26M226 56v26" stroke="#0e0f0d" stroke-width="1" opacity=".7" />
+  <path d="M290 61h13v5h-10z" fill="#eceee7" />
+  <path d="M21 63h9l-1 5h-8z" fill="#959990" />
+  <g clip-path={`url(#${g("clip")})`}><rect class="hb-car-sheen" x="-120" y="20" width="90" height="70" fill={`url(#${g("sheen")})`} /></g>
+  <g><circle cx="78" cy="88" r="19" fill="#0f100e" /><circle cx="78" cy="88" r="11.5" fill={`url(#${g("rim")})`} /><circle cx="78" cy="88" r="3" fill="#2b2d28" /></g>
+  <g><circle cx="240" cy="88" r="19" fill="#0f100e" /><circle cx="240" cy="88" r="11.5" fill={`url(#${g("rim")})`} /><circle cx="240" cy="88" r="3" fill="#2b2d28" /></g>
+</svg>

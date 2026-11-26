@@ -1,25 +1,20 @@
 ---
 import Base from "../layouts/Base.astro";
+import SiteHeader from "../components/SiteHeader.astro";
+import Icon from "../components/Icon.astro";
 import { CONTACT } from "../lib/brand";
 const pilot = "https://wa.me/" + CONTACT.whatsapp + "?text=" + encodeURIComponent("Hello HashBrown Studios. I'd like to discuss your automotive business software.");
 ---
 <Base title="Page not found — HashBrown Studios" description="This page does not exist. Return to the HashBrown Studios homepage to explore our automotive business software." path={null}>
 <div class="hb-site">
-  <header class="hb-header">
-    <div class="hb-header-inner">
-      <a class="hb-wordmark" href="/"><span class="hb-mark">hb</span><span>HashBrown<small>STUDIOS</small></span></a>
-      <nav class="hb-nav"><a href="/#templates">Solutions</a><a href="/platform/">Platform</a><a href="/#work">Selected work</a><a href="/#about">About</a></nav>
-      <a class="hb-button hb-button-dark hb-header-cta" href={pilot}>Discuss early access ↗</a>
-      <details class="hb-mobile-nav"><summary aria-label="Open navigation"><span></span><span></span></summary><nav><a href="/#templates">Solutions</a><a href="/platform/">Platform</a><a href="/#contact">Contact</a></nav></details>
-    </div>
-  </header>
+  <SiteHeader cta={pilot} />
   <main id="main" class="hb-shell hb-not-found">
-    <p class="hb-eyebrow">ERROR 404</p>
+    <p class="hb-eyebrow">Error 404</p>
     <h1>Page not found.<br /><span>It may have moved.</span></h1>
-    <p class="hb-platform-lede">The page you were looking for does not exist. Everything about our automotive software starts on the homepage.</p>
+    <p class="hb-lede">The page you were looking for does not exist. Everything about our automotive software starts on the homepage.</p>
     <div class="hb-hero-actions">
-      <a class="hb-button hb-button-dark" href="/">Go to homepage ↗</a>
-      <a class="hb-text-link" href="/#contact">Contact HashBrown ↗</a>
+      <a class="hb-button hb-button-dark" href="/">Go to homepage <Icon name="arrow-right" /></a>
+      <a class="hb-text-link" href="/#contact">Contact HashBrown <Icon name="arrow-up-right" /></a>
     </div>
   </main>
 </div>

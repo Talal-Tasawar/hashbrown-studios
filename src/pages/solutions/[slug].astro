@@ -1,17 +1,91 @@
 ---
 import Base from "../../layouts/Base.astro";
+import SiteHeader from "../../components/SiteHeader.astro";
+import SiteFooter from "../../components/SiteFooter.astro";
+import TemplatePreview from "../../components/TemplatePreview.astro";
+import Icon from "../../components/Icon.astro";
 import { CONTACT } from "../../lib/brand";
 import { solutions } from "../../data/solutions";
-const wa=(name:string)=>"https://wa.me/"+CONTACT.whatsapp+"?text="+encodeURIComponent("Hello HashBrown Studios. I'd like to discuss the "+name+" software template and early access.");
-export function getStaticPaths(){return solutions.map(template=>({params:{slug:template.slug},props:{template}}))}
-const {template}=Astro.props;const pilot=wa(template.name);
+
+export function getStaticPaths() {
+  return solutions.map((template) => ({ params: { slug: template.slug }, props: { template } }));
+}
+const { template } = Astro.props;
+const pilot = "https://wa.me/" + CONTACT.whatsapp + "?text=" + encodeURIComponent("Hello HashBrown Studios. I'd like to discuss the " + template.name + " software template and early access.");
+const live = template.slug === "rent-a-car";
 ---
-<Base title={template.name+" Software — HashBrown Studios"} description={template.intro} path={"/solutions/"+template.slug+"/"}>
-<div class="hb-site"><header class="hb-header"><div class="hb-header-inner"><a class="hb-wordmark" href="/"><span class="hb-mark">hb</span><span>HashBrown<small>STUDIOS</small></span></a><nav class="hb-nav"><a href="/#templates">Solutions</a><a href="/platform/">Platform</a><a href="/#work">Selected work</a><a href="/#about">About</a></nav><a class="hb-button hb-button-dark hb-header-cta" href={pilot}>Discuss early access ↗</a><details class="hb-mobile-nav"><summary aria-label="Open navigation"><span></span><span></span></summary><nav><a href="/#templates">Solutions</a><a href="/platform/">Platform</a><a href="/#contact">Contact</a></nav></details></div></header>
-<main id="main"><section class="hb-shell hb-sub-hero"><a class="hb-back" href="/#templates">← All solutions</a><p class="hb-eyebrow">{template.n} / {template.label}</p><div class="hb-sub-hero-grid"><div><span class="hb-status">{template.status}</span><h1>{template.headline}</h1><p>{template.intro}</p><a class="hb-button hb-button-dark" href={pilot}>Discuss early access ↗</a></div><aside class="hb-summary"><small>THE TEMPLATE</small><strong>{template.name}</strong><p>Customer-facing experience</p><hr/><p>Business operations dashboard</p><hr/><p>Shared HashBrown platform</p><small>PRODUCT DIRECTION / EARLY ACCESS</small></aside></div></section>
-<section class="hb-section hb-section-light"><div class="hb-shell hb-detail-grid"><div class="hb-detail-heading"><p class="hb-eyebrow">CUSTOMER EXPERIENCE</p><h2>{template.ct}</h2><p>{template.ci}</p></div><ul class="hb-detail-list">{template.cf.map((item,i)=><li><span>0{i+1}</span><p>{item}</p></li>)}</ul></div></section>
-<section class="hb-section hb-section-paper"><div class="hb-shell hb-detail-grid"><div class="hb-detail-heading"><p class="hb-eyebrow">BUSINESS DASHBOARD</p><h2>{template.ot}</h2><p>{template.oi}</p></div><ul class="hb-detail-list">{template.of.map((item,i)=><li><span>0{i+1}</span><p>{item}</p></li>)}</ul></div></section>
-<section class="hb-section hb-section-dark"><div class="hb-shell hb-workflow-grid"><div><p class="hb-eyebrow">THE WORKFLOW</p><h2>From first contact<br/><span>to completed work.</span></h2></div><ol>{template.steps.map((item,i)=><li><span>0{i+1}</span><b>{item}</b></li>)}</ol></div></section>
-<section class="hb-section hb-section-light"><div class="hb-shell hb-scope-note"><small>SCOPE NOTE</small><p>{template.note}</p><a class="hb-button hb-button-dark" href={pilot}>Talk to HashBrown ↗</a></div></section></main>
-<footer class="hb-footer"><div class="hb-shell hb-footer-main"><a class="hb-wordmark" href="/"><span class="hb-mark">hb</span><span>HashBrown<small>STUDIOS</small></span></a><p>Automotive business software,<br/>designed in Islamabad.</p><nav><a href="/#templates">Solutions</a><a href="/platform/">Platform</a><a href="/#work">Selected work</a><a href="/#contact">Contact</a></nav><div><a href={"mailto:"+CONTACT.email}>{CONTACT.email}</a><a href={CONTACT.phoneHref}>{CONTACT.phoneDisplay}</a><span>{CONTACT.address}</span></div></div><div class="hb-shell hb-footer-bottom"><span>© {new Date().getFullYear()} HASHBROWN STUDIOS</span><span>FOUR AUTOMOTIVE TEMPLATES / ONE PLATFORM</span><a href="#main">BACK TO TOP ↑</a></div></footer></div>
+<Base title={template.name + " Software — HashBrown Studios"} description={template.intro} path={"/solutions/" + template.slug + "/"}>
+<div class="hb-site">
+  <SiteHeader cta={pilot} />
+  <main id="main">
+    <section class="hb-shell hb-sub-hero">
+      <a class="hb-back" href="/#templates"><Icon name="arrow-left" /> All solutions</a>
+      <div class="hb-sub-hero-grid">
+        <div class="hb-sub-hero-copy">
+          <p class="hb-eyebrow" data-reveal>{template.n} · {template.label}</p>
+          <span class:list={["hb-status", { "is-live": live }]} data-reveal style="--i:1"><i></i>{template.status}</span>
+          <h1 data-reveal style="--i:1">{template.headline}</h1>
+          <p class="hb-lede" data-reveal style="--i:2">{template.intro}</p>
+          <div class="hb-hero-actions" data-reveal style="--i:3">
+            <a class="hb-button hb-button-dark" href={pilot} target="_blank" rel="noopener noreferrer">Discuss early access <Icon name="arrow-up-right" /></a>
+            <a class="hb-text-link" href="/platform/">How the platform fits <Icon name="arrow-right" /></a>
+          </div>
+        </div>
+        <div class="hb-sub-hero-visual" data-reveal="rise" style="--i:2">
+          <div class="hb-preview-frame">
+            <div class="hb-preview-frame-top"><span>{template.name}</span><span>Concept · sample data</span></div>
+            <TemplatePreview slug={template.slug} size="hero" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="hb-section hb-section-light">
+      <div class="hb-shell hb-detail-grid">
+        <div class="hb-detail-heading" data-reveal>
+          <p class="hb-eyebrow">Customer experience</p>
+          <h2>{template.ct}</h2>
+          <p>{template.ci}</p>
+        </div>
+        <ul class="hb-detail-list">
+          {template.cf.map((item, i) => <li data-reveal style={`--i:${i}`}><span>0{i + 1}</span><p>{item}</p></li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="hb-section hb-section-paper">
+      <div class="hb-shell hb-detail-grid">
+        <div class="hb-detail-heading" data-reveal>
+          <p class="hb-eyebrow">Business dashboard</p>
+          <h2>{template.ot}</h2>
+          <p>{template.oi}</p>
+        </div>
+        <ul class="hb-detail-list">
+          {template.of.map((item, i) => <li data-reveal style={`--i:${i}`}><span>0{i + 1}</span><p>{item}</p></li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="hb-section hb-section-dark">
+      <div class="hb-shell hb-workflow-grid">
+        <div data-reveal>
+          <p class="hb-eyebrow">The workflow</p>
+          <h2>From first contact<br /><span>to completed work.</span></h2>
+        </div>
+        <ol>
+          {template.steps.map((item, i) => <li class="hb-glass-dark" data-reveal style={`--i:${i}`}><span>0{i + 1}</span><b>{item}</b></li>)}
+        </ol>
+      </div>
+    </section>
+
+    <section class="hb-section hb-section-light">
+      <div class="hb-shell hb-scope-note" data-reveal>
+        <small>Scope note</small>
+        <p>{template.note}</p>
+        <a class="hb-button hb-button-dark" href={pilot} target="_blank" rel="noopener noreferrer">Talk to HashBrown <Icon name="arrow-up-right" /></a>
+      </div>
+    </section>
+  </main>
+  <SiteFooter />
+</div>
 </Base>
