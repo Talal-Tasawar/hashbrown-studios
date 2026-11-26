@@ -50,3 +50,14 @@ body{margin:0;background:var(--hb-bg);color:var(--hb-ink);font-family:"Archivo",
 html{background:var(--hb-bg)}
 .hb-not-found h1{margin:18px 0 0}
 .hb-not-found .hb-platform-lede{max-width:560px;margin:24px 0 0}
+
+/* Selected clients: names and logos (replaces the live-site cards) */
+.hb-client-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0;padding:0;list-style:none}
+.hb-client-logo{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:10px;background:var(--hb-dark)}
+.hb-client-logo img{position:absolute;inset:0;box-sizing:border-box;width:100%;height:100%;padding:clamp(20px,2.6vw,36px);object-fit:contain;filter:grayscale(1);opacity:.92;transition:filter .3s,opacity .3s}
+.hb-client:hover .hb-client-logo img{filter:none;opacity:1}
+.hb-client p{margin:14px 0 0;font-size:15px;font-weight:650;letter-spacing:-.03em}
+@media(max-width:720px){
+.hb-client-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+.hb-client p{font-size:13px}
+}
